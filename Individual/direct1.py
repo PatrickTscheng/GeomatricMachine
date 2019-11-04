@@ -1,6 +1,7 @@
 import numpy as np
 
-def exp(A:np.array, n: int):
+
+def exp(A: np.array, n: int):
     A_new = np.copy(A)
     for i in range(n):
         A_new = np.dot(A_new, A)
@@ -13,12 +14,24 @@ if __name__ == '__main__':
     P = 0.05
     n = 30
     state = np.array([0, 1])
-    A1 = np.array([[1-R, P],[R, 1-P]])
+    A1 = np.array([[1-R, P], [R, 1-P]])
 
     Pr = []
     for i in range(n):
-        Pr.append(np.dot(state, exp(A1,i)))
+        Pr.append(np.dot(state, exp(A1, i)))
 
-    print (Pr)
+    str_sum = ''
+    i = 1
+    for e in Pr:
+        str_sum += '(' + str(i) + ',' + str(e[0]) + ')\n'
+        i += 1
 
+    i = 1
+    for e in Pr:
+        str_sum += '(' + str(i) + ',' + str(e[1]) + ')\n'
+        i += 1
 
+    file = open("result1.txt", 'w')
+    file.truncate()
+    file.write(str_sum)
+    file.close()

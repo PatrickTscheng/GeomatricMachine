@@ -1,7 +1,4 @@
 Individual/result.txt
-Two-machine/__pycache__/buffer.cpython-37.pyc
-Two-machine/__pycache__/individual.cpython-37.pyc
-.vscode/launch.json
-.vscode/settings.json
-Individual/.vscode/settings.json
-Two-machine/.vscode/settings.json
+**/__pycache__/**
+**/.vscode/**
+Individual/result1.txt
