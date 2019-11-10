@@ -18,11 +18,11 @@ for i in range(max_range):  # initial
     indi.append(TwoMachine(P1, R1, P2, R2, N))
 
 for i in range(n):
-    PR.append(0)
-    CR.append(0)
-    WIP.append(0)
-    ST2.append(0)
-    BL1.append(0)
+    PR.append(0.0)
+    CR.append(0.0)
+    WIP.append(0.0)
+    ST2.append(0.0)
+    BL1.append(0.0)
     for j in range(max_range):
         pr_t, cr_t, wip_t, st2_t, bl1_t = indi[j].one_slot()
         PR[i] += pr_t
@@ -30,11 +30,11 @@ for i in range(n):
         WIP[i] += wip_t
         ST2[i] += st2_t
         BL1[i] += bl1_t
-    PR[i] = (PR[i]/max_range)
-    CR[i] = (CR[i]/max_range)
-    WIP[i] = (WIP[i]/max_range)
-    ST2[i] = (ST2[i]/max_range)
-    BL1[i] = (BL1[i]/max_range)
+    PR[i] = PR[i]/max_range
+    CR[i] = CR[i]/max_range
+    WIP[i] = WIP[i]/max_range
+    ST2[i] = ST2[i]/max_range
+    BL1[i] = BL1[i]/max_range
 
 str_out = ''
 i = 1
