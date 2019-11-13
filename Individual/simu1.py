@@ -1,7 +1,7 @@
 from individual import Individual
 P = 0.05  # break down probability
 R = 0.2  # repair probability
-n = 30  # numbers of slot
+n = 40  # numbers of slot
 X_init = 1  # initial state of machine
 max_range = 1000000  # maxmal quantity of the production lines
 sum = []
@@ -22,6 +22,11 @@ for e in sum:
     str_sum += '(' + str(i) + ',' + str(e) + ')\n'
     i += 1
 
+i = 1
+for e in sum:
+    str_sum += '(' + str(i) + ',' + str(1-e) + ')\n'
+    i += 1
+
 # force initial
 indi = []
 sum = []
@@ -38,6 +43,11 @@ for i in range(n):
 i = 1
 for e in sum:
     str_sum += '(' + str(i) + ',' + str(e) + ')\n'
+    i += 1
+
+i = 1
+for e in sum:
+    str_sum += '(' + str(i) + ',' + str(1-e) + ')\n'
     i += 1
 
 file = open("result.txt", 'w')

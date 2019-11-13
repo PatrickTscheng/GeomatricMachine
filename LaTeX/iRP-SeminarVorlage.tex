@@ -1,0 +1,358 @@
+% Formatvorlage f\"{u}r das Seminar "Robotik und Prozessinformatik"
+%
+% Technische Universitaet Braunschweig
+% Institut fuer Robotik und Prozessinformatik
+% Muehlenpfordtstrasse 23
+% D-38106 Braunschweig
+% GERMANY
+%
+% http://www.cs.tu-bs.de/rob
+%
+
+%
+\documentclass[ifn,english,masterarbeit,pdf,cd]{report}
+\usepackage{a4}
+\usepackage{doku}
+\usepackage{german}
+\usepackage{longtable}
+%\usepackage[draft]{graphicx}
+\usepackage{graphicx}
+\usepackage{graphics}
+\usepackage{bbm}
+\usepackage[dvips]{epsfig}
+\usepackage{ngerman}
+\usepackage{nomencl}
+\usepackage{amssymb}
+\usepackage{indentfirst}
+\usepackage{amsmath}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{url}
+\usepackage{caption}
+%\captionsetup{margin=10pt,format=hang,justification=justified}
+\captionsetup{format=hang}
+\usepackage{subfigure}
+\usepackage{float}
+\usepackage[section]{placeins}
+%\usepackage{tocloft}
+\usepackage{caption}
+\RequirePackage[colorlinks=true,linkcolor=black,citecolor=black,anchorcolor=black,urlcolor=black,hyperindex,plainpages=true,pdfborder = 0 0 0]{hyperref}
+%\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{titletoc}
+
+\usepackage{tikz}
+\usepackage{tikzscale}
+\usepackage{pgfplots}
+\usepgfplotslibrary{units}
+%\usepackage{tocloft}
+ 
+\renewcommand{\headrulewidth}{0.5pt}
+%\renewcommand{\footrulewidth}{0.5pt}
+%\renewcommand{cmd}{def}
+\fancyhf{} 
+\fancyhead[R]{\thepage}
+\fancyhead[L]{\leftmark} 
+
+\captionsetup{font={large}}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{ %
+	language=Octave,                % the language of the code
+	basicstyle=\normalsize,           % the size of the fonts that are used for the code
+%	numbers=left,                   % where to put the line-numbers
+%	numberstyle=\tiny\color{gray},  % the style that is used for the line-numbers
+	stepnumber=2,                   % the step between two line-numbers. If it's 1, each line 
+	% will be numbered
+%	numbersep=5pt,                  % how far the line-numbers are from the code
+	backgroundcolor=\color{white},      % choose the background color. You must add \usepackage{color}
+	showspaces=false,               % show spaces adding particular underscores
+	showstringspaces=false,         % underline spaces within strings
+	showtabs=false,                 % show tabs within strings adding particular underscores
+	frame=single,                   % adds a frame around the code
+	rulecolor=\color{black},        % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. commens (green here))
+	tabsize=2,                      % sets default tabsize to 2 spaces
+	captionpos=b,                   % sets the caption-position to bottom
+	breaklines=true,                % sets automatic line breaking
+	breakatwhitespace=false,        % sets if automatic breaks should only happen at whitespace
+	title=\lstname,                   % show the filename of files included with \lstinputlisting;
+	% also try caption instead of title
+	keywordstyle=\color{blue},          % keyword style
+	commentstyle=\color{dkgreen},       % comment style
+	stringstyle=\color{mauve},         % string literal style
+	escapeinside={\%*}{*)},            % if you want to add LaTeX within your code
+	morekeywords={*,...},              % if you want to add more keywords to the set
+%	keepspaces=true,
+}
+
+% #######################################################################
+% latin alphabet: small letters
+\newcommand{\length}{a}
+% b
+\newcommand{\coefficient}{c}
+\newcommand{\offset}{d}
+\newcommand{\error}{\boldsymbol{e}}
+\newcommand{\force}{\boldsymbol{f}}
+\newcommand{\gravity}{\boldsymbol{g}}
+\newcommand{\contact}{\boldsymbol{h}}
+\newcommand{\iteration}{i}
+% j
+\newcommand{\fkine}{k}
+\newcommand{\load}{\boldsymbol{l}}
+\newcommand{\work}{m}
+\newcommand{\joints}{n}
+% o
+\newcommand{\position}{\boldsymbol{p}}
+
+\newcommand{\joint}{\boldsymbol{q}}
+\newcommand{\jv}{\boldsymbol{\dot{q}}}
+\newcommand{\ja}{\boldsymbol{\ddot{q}}}
+\newcommand{\arbi}{q_{a}}
+% r
+\newcommand{\generation}{s}
+\newcommand{\twist}{\boldsymbol{t}}
+\newcommand{\direction}{\boldsymbol{u}}
+\newcommand{\volume}{v}
+\newcommand{\manipulability}{w}
+\newcommand{\pose}{\boldsymbol{x}}
+\newcommand{\posea}{\boldsymbol{\dot{x}}}
+\newcommand{\posev}{\boldsymbol{\ddot{x}}}
+% y
+% z
+
+
+% latin alphabet: capital letters as scalars
+
+
+% latin alphabet: capital letters as matrices
+\newcommand{\SVDA}{\boldsymbol{A}}
+\newcommand{\selection}{\boldsymbol{B}}
+\newcommand{\basef}{\boldsymbol{B}}
+\newcommand{\centrifugal}{\boldsymbol{C}}
+\newcommand{\tip}{C}
+\newcommand{\mass}{\boldsymbol{D}}
+\newcommand{\ee}{\boldsymbol{E}}
+\newcommand{\objectf}{\boldsymbol{F}}
+\newcommand{\grasp}{\boldsymbol{G}}
+\newcommand{\scalar}{\boldsymbol{H}}
+% I
+\newcommand{\Jacobian}{\boldsymbol{J}}
+\newcommand{\gain}{\boldsymbol{K}}
+\newcommand{\scaling}{\boldsymbol{L}}
+\newcommand{\inertia}{\boldsymbol{M}}
+\newcommand{\nullspace}{\boldsymbol{N}}
+\newcommand{\object}{O}
+\newcommand{\positive}{\boldsymbol{P}}
+\newcommand{\weighted}{\boldsymbol{Q}}
+\newcommand{\quaternion}{Q}
+\newcommand{\rotation}{\boldsymbol{R}}
+\newcommand{\skewm}{\boldsymbol{S}}
+\newcommand{\base}{T}
+\newcommand{\SVDU}{\boldsymbol{U}}
+\newcommand{\SVDV}{\boldsymbol{V}}
+\newcommand{\world}{W}
+% X
+% Y
+% Z
+
+
+% for bold Greek letters, use \boldsymbol instead of \mathbf
+% Greek alphabet: small letters
+\newcommand{\orientation}{\boldsymbol\phi}
+\newcommand{\angular}{\boldsymbol{\omega}}
+\newcommand{\singular}{\sigma}
+\newcommand{\torque}{\boldsymbol\tau}
+\newcommand{\storque}{\boldsymbol{\tilde{\tau}}}
+\newcommand{\steplength}{\gamma}
+\newcommand{\velocity}{\boldsymbol\nu}
+\newcommand{\anglex}{\theta}
+\newcommand{\anglez}{\alpha}
+\newcommand{\real}{\eta}
+\newcommand{\kon}{\boldsymbol\epsilon}
+
+% Greek alphabet: capital letters
+
+% special symbols
+
+% #######################################################################
+% Titelseite
+% #######################################################################
+\begin{document}
+\large \selectlanguage{english}
+\pagenumbering{roman}
+\begin{titlepage}
+    \setcounter{page}{1}
+    \let\footnotesize\small
+    \let\footnoterule\relax
+    \headsep 1.5cm
+    \vskip -2cm
+    \begin{center}
+    	\rule[1\baselineskip]{\textwidth}{1pt}
+    	\LARGE\bf Model of serial production line
+    	\vskip 1\baselineskip
+    	\rule[1\baselineskip]{\textwidth}{1pt}
+    \end{center}   
+%    \vskip 0.5cm
+    \begin{center}        
+               {\Large{Student Thesis\\}\par}
+                \vskip 0.25cm
+                {\large submitted by\\}
+                \vskip 0.25cm
+                {\Large Pengfei Zheng\\ \large Matriculation Number: 4729268}
+                \vskip 0.8cm
+                {\large Institut f\"{u}r Robotik und Prozessinformatik}                       
+    \end{center}
+%    \vskip 1cm
+\linespread{1.5}
+\begin{table}[!h]
+	\centering	
+	\begin{tabular}{rl}
+		\large	1. Examiner:& \large Prof. Dr. -Ing. Klaus Dr\"{o}der \\
+		\large2. Examiner:& \large Prof. Dr. Jochen Steil \\
+		% \large3. Examiner:& \large Dr. -Ing. Franz Dietrich \\
+		% \large Supervisor:& \large M. Sc. Niels Dehio \\
+	\end{tabular}
+\end{table}
+% \vskip 0.5cm
+    \begin{figure}[!h]
+        \begin{center}
+%            \epsfig{file = TU-Logo.eps}
+            \includegraphics[width=0.3\linewidth]{carolo.jpg}
+        \end{center}
+    \end{figure}
+  %  \vskip 1cm
+  %  \centerline{\LARGE\bf Institut f\"{u}r Robotik und Prozessinformatik}
+  %  \vskip 1cm
+   % \centerline{\LARGE\bf Prof.~Dr.~J.~Steil}
+%\vskip 0.25cm
+\centerline{\large\bf Technische Universit\"{a}t Braunschweig}
+\vskip 1cm
+\centerline{\large\bf 2020.01.01}
+
+\end{titlepage}
+%\setcounter{footnote}{0}
+%\setcounter{totalnumber}{8}
+
+% #######################################################################
+% Eidesstattliche
+% #######################################################################
+\clearpage
+\pagenumbering{roman}
+\thispagestyle{fancy}
+\lhead{\textsl{Eidesstattliche Erkl\"{a}rung}}
+\rhead{\textbf{\thepage}}
+\cfoot{}
+\input{Eidesstattliche}
+\addcontentsline{toc}{chapter}{Eidesstattliche Erkl\"{a}rung}
+% #######################################################################
+% Acknowledgement
+% #######################################################################
+\clearpage
+%\thispagestyle{headings}
+\thispagestyle{fancy}
+\lhead{\textsl{Acknowledgement}}
+\rhead{\textbf{\thepage}}
+\cfoot{}
+\input{part/Acknowledgement}
+\addcontentsline{toc}{chapter}{Acknowledgement}
+
+% #######################################################################
+% Abstract
+% #######################################################################
+\clearpage
+% \thispagestyle{headings}
+\thispagestyle{fancy}
+\lhead{\textsl{Abstract}}
+\rhead{\textbf{\thepage}}
+\cfoot{}
+\input{part/abstract}
+\addcontentsline{toc}{chapter}{Abstract}
+
+% % #######################################################################
+% % Inhaltsverzeichnis
+% % #######################################################################%
+% \clearpage
+% %\pagenumbering{roman}
+
+% %\pagestyle{fancy}
+% %\fancyfoot[R]{\thepage}
+% %\pagestyle{myheadings}
+% \thispagestyle{fancy}
+% \lhead{\textsl{Contents}}
+% \rhead{\textbf{\textbf{iv}} }
+% \cfoot{}
+% \addtocontents{toc}{\protect\thispagestyle{fancy}}
+% \pdfbookmark[0]{Contents}{anchor}
+% \tableofcontents
+
+% %\renewcommand{\headrulewidth}{1pt}
+% %\setlength{\baselineskip}{3ex}
+% %\rhead{45}
+
+% %\renewcommand{\headrulewidth}{0pt}
+% %\afterpage{\lhead{new value}}
+
+% \clearpage
+% \setcounter{page}{5}
+% \thispagestyle{fancy}
+% \lhead{\textsl{List of Figures}}
+% \rhead{ \textbf{\thepage} }
+% \cfoot{}
+% \listoffigures
+% \addcontentsline{toc}{chapter}{\listfigurename}
+
+% \clearpage
+% \setcounter{page}{8}
+% \thispagestyle{fancy}
+% \lhead{\textsl{List of Tables}}
+% \rhead{\textbf{\thepage}}
+% \cfoot{}
+% \listoftables
+% \addcontentsline{toc}{chapter}{\listtablename}
+% % #######################################################################
+% % Dokument
+% % #######################################################################
+
+\cleardoublepage
+
+\input{part/part1}
+% \input{part/part2}
+% \input{part/part3}
+% \input{part/part4}
+% \input{part/part5}
+% \input{part/part6}
+% \input{part/part7}
+
+% #######################################################################
+% Abbildungsverzeichnis
+% #######################################################################
+
+% \addcontentsline{toc}{chapter}{Abbildungsverzeichnis} \listoffigures
+
+% #######################################################################
+% Tabellenverzeichnis
+% #######################################################################
+
+%\newpage
+%\addcontentsline{toc}{chapter}{Tabellenverzeichnis} \listoftables
+
+% #######################################################################
+% Literaturverzeichnis
+% #######################################################################
+
+%\clearpage
+\newpage
+\renewcommand{\bibname}{List of References}
+\pagestyle{fancy}
+\lhead{\textsl{List of References}}
+\rhead{\thepage}
+\cfoot{}
+\bibliographystyle{unsrtdin}
+\bibliography{./LiteraturVorlage}
+\addcontentsline{toc}{chapter}{\bibname}
+
+\end{document}

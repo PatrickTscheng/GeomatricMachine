@@ -3,3 +3,12 @@
 Individual/result.txt
 Individual/result1.txt
 Two-machine/result_sim.txt
+LaTeX/**.aux
+LaTeX/**.fdb_latexmk
+LaTeX/**.fls
+LaTeX/**.log
+LaTeX/**.out
+LaTeX/**.gz
+LaTeX/iRP-SeminarVorlage.pdf
+LaTeX/**.bbl
+LaTeX/**.blg

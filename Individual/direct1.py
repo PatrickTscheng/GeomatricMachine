@@ -12,7 +12,7 @@ def exp(A: np.array, n: int):
 if __name__ == '__main__':
     R = 0.2
     P = 0.05
-    n = 30
+    n = 40
     state = np.array([0, 1])
     A1 = np.array([[1-R, P], [R, 1-P]])
 
@@ -28,7 +28,17 @@ if __name__ == '__main__':
 
     i = 1
     for e in Pr:
+        str_sum += '(' + str(i) + ',' + str(1-e[0]) + ')\n'
+        i += 1
+
+    i = 1
+    for e in Pr:
         str_sum += '(' + str(i) + ',' + str(e[1]) + ')\n'
+        i += 1
+
+    i = 1
+    for e in Pr:
+        str_sum += '(' + str(i) + ',' + str(1-e[1]) + ')\n'
         i += 1
 
     file = open("result1.txt", 'w')
