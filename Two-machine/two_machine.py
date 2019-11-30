@@ -14,8 +14,8 @@ class TwoMachine:
         self.M1.b_and_s()
         self.M2.b_and_s()
         # step 2: begin run
-        PR, M1_s = self.M1.run_once()
-        CR, M2_s = self.M2.run_once()
+        CR, M1_s = self.M1.run_once()
+        PR, M2_s = self.M2.run_once()
         WIP = self.B1.get_measure()
         if M2_s and self.B1.check_null() is True:
             ST2 = 1
