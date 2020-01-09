@@ -1,12 +1,10 @@
 from multi_machine import MultiMachine
 
-Pi = 0.05  # break down probability machine 1
-Ri = 0.2  # repair probability machine 1
-# P2 = 0.06  # break down probability machine 2
-# R2 = 0.21  # repair probability machine 2
+Pi = 0.05  # break down probability 
+Ri = 0.2  # repair probability 
 N = 5  # Buffer space
 n = 100  # slot of time
-max_range = 1000
+max_range = 100000
 indi = []
 PR = [0 for i in range(n)]
 CR = [0 for i in range(n)]

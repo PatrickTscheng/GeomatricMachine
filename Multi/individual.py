@@ -52,19 +52,19 @@ class Individual:
         else:
             return NO_PRODUCT, self.x_n
 
-    def blockage(self, B: Buffer):
-        self.flag_b_s is B.check_full()
+    def blockage(self, B: Buffer) -> bool:
+        return B.check_full()
 
-    def starvation(self, B: Buffer):
-        self.flag_b_s is B.check_null()
+    def starvation(self, B: Buffer) -> bool:
+        return B.check_null()
 
     def b_and_s(self):
         if self.B_f is None:
-            self.blockage(self.B_b)
+            self.flag_b_s = self.blockage(self.B_b)
         elif self.B_b is None:
-            self.starvation(self.B_f)
+            self.flag_b_s = self.starvation(self.B_f)
         else:
-            self.starvation(self.B_f) or self.blockage(self.B_b)
+            self.flag_b_s = self.starvation(self.B_f) or self.blockage(self.B_b)
 
     def buffer_change(self):
         if self.B_f is None:

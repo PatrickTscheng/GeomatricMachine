@@ -6,15 +6,13 @@ class MultiMachine:
     
     MachineNumber = 4
 
-    def __init__(self, Pi, Ri, N):
+    def __init__(self, Pi, Ri, N, MachineNumber = 4):
+        self.MachineNumber = MachineNumber
         self.BufferArray = []
         for i in range(self.MachineNumber-1): self.BufferArray.append(Buffer(N))
-        # self.B2 = Buffer(N)
-        # self.B3 = Buffer(N)
 
         self.Machine = []
         self.Machine.append(Individual(Pi, Ri, self.BufferArray[0], True))
-        # self.M1 = Individual(Pi, Ri, self.B1, True)
         for i in range(self.MachineNumber-2):
             self.Machine.append(Individual(Pi, Ri, self.BufferArray[i], self.BufferArray[i+1]))
         # self.M2 = Individual(Pi, Ri, self.B1, self.B2)

@@ -4,24 +4,24 @@ from buffer import Buffer
 
 class Individual:
 
-    def __init__(self, Pi: float, Ri: float,
+    def __init__(self, P: float, R: float,
                  B_f: Buffer, B_b: Buffer, X_init=False):
-        assert (0 <= Pi and Pi <= 1) is True
-        assert (0 <= Ri and Ri <= 1) is True
-        self.Pi = Pi  # breakdown probability
-        self.Ri = Ri  # repair probability
+        assert (0 <= P and P <= 1) is True
+        assert (0 <= R and R <= 1) is True
+        self.P = P  # breakdown probability
+        self.R = R  # repair probability
         self.x_n = X_init  # state of x false represent down
         self.flag_b_s = False
         # True represents the machine is blockage or stravation
         self.B_f = B_f  # Buffer forward
         self.B_b = B_b  # Buffer backward
 
-    def __init__(self, Pi: float, Ri: float,
+    def __init__(self, P: float, R: float,
                  B: Buffer, flag: bool, X_init=False):
-        assert (0 <= Pi and Pi <= 1) is True
-        assert (0 <= Ri and Ri <= 1) is True
-        self.Pi = Pi  # breakdown probability
-        self.Ri = Ri  # repair probability
+        assert (0 <= P and P <= 1) is True
+        assert (0 <= R and R <= 1) is True
+        self.P = P  # breakdown probability
+        self.R = R  # repair probability
         self.x_n = X_init  # state of x false represent down
         self.flag_b_s = False
         # True represents the machine is blockage or stravation
@@ -40,10 +40,10 @@ class Individual:
         NO_PRODUCT = 0
 
         if self.x_n is False:
-            if random.random() <= self.Ri:
+            if random.random() <= self.R:
                 self.x_n = True
         else:
-            if random.random() <= self.Pi:
+            if random.random() <= self.P:
                 self.x_n = False
 
         if (self.x_n and (not self.flag_b_s)):
@@ -52,19 +52,19 @@ class Individual:
         else:
             return NO_PRODUCT, self.x_n
 
-    def blockage(self, B: Buffer):
-        self.flag_b_s is B.check_full()
+    def blockage(self, B: Buffer) -> bool:
+        return B.check_full()
 
-    def starvation(self, B: Buffer):
-        self.flag_b_s is B.check_null()
+    def starvation(self, B: Buffer) -> bool:
+        return B.check_null()
 
     def b_and_s(self):
         if self.B_f is None:
-            self.blockage(self.B_b)
+            self.flag_b_s = self.blockage(self.B_b)
         elif self.B_b is None:
-            self.starvation(self.B_f)
+            self.flag_b_s = self.starvation(self.B_f)
         else:
-            self.starvation(self.B_f) or self.blockage(self.B_b)
+            self.flag_b_s = self.starvation(self.B_f) or self.blockage(self.B_b)
 
     def buffer_change(self):
         if self.B_f is None:
@@ -74,3 +74,9 @@ class Individual:
         else:
             self.B_b.add_one()
             self.B_f.take_one()
+
+    def buffer_get(self):
+        if self.B_f is None:
+            return self.B_b.get_measure()
+        elif self.B_b is None:
+            return self.B_f.get_measure()

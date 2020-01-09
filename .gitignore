@@ -1,8 +1,6 @@
 **/__pycache__/**
 **/.vscode/**
-Individual/result.txt
-Individual/result1.txt
-Two-machine/result_sim.txt
+**/**.txt
 LaTeX/**.aux
 LaTeX/**.fdb_latexmk
 LaTeX/**.fls
@@ -12,3 +10,4 @@ LaTeX/**.gz
 LaTeX/iRP-SeminarVorlage.pdf
 LaTeX/**.bbl
 LaTeX/**.blg
+Multi/result_sim.txt

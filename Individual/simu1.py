@@ -16,13 +16,15 @@ for i in range(n):
         sum[i] += indi[j].run_once()
     sum[i] = (sum[i]/max_range)
 
-str_sum = ''
+str_sum = 'initial 1\n'
 i = 1
+str_sum += 'x=1\n'
 for e in sum:
     str_sum += '(' + str(i) + ',' + str(e) + ')\n'
     i += 1
 
 i = 1
+str_sum += 'x=0\n'
 for e in sum:
     str_sum += '(' + str(i) + ',' + str(1-e) + ')\n'
     i += 1
@@ -40,12 +42,15 @@ for i in range(n):
         sum[i] += indi[j].run_once()
     sum[i] = (sum[i]/max_range)
 
+str_sum += 'initial 0\n'
 i = 1
+str_sum += 'x=1\n'
 for e in sum:
     str_sum += '(' + str(i) + ',' + str(e) + ')\n'
     i += 1
 
 i = 1
+str_sum += 'x=0\n'
 for e in sum:
     str_sum += '(' + str(i) + ',' + str(1-e) + ')\n'
     i += 1
