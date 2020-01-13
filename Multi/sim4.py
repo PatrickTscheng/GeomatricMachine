@@ -3,7 +3,7 @@ from multi_machine import MultiMachine
 Pi = 0.05  # break down probability 
 Ri = 0.2  # repair probability 
 N = 5  # Buffer space
-n = 100  # slot of time
+n = 150  # slot of time
 max_range = 100000
 indi = []
 PR = [0 for i in range(n)]

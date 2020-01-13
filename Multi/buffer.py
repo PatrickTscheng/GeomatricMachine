@@ -5,6 +5,7 @@ class Buffer:
         self.storage = 0
 
     def check_null(self) -> bool:
+    #     print("check n")
         if self.storage == 0:
             return True
         else:
@@ -31,4 +32,5 @@ class Buffer:
             return True
 
     def get_measure(self) -> int:
+        # print(self.storage)
         return self.storage

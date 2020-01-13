@@ -12,12 +12,10 @@ class MultiMachine:
         for i in range(self.MachineNumber-1): self.BufferArray.append(Buffer(N))
 
         self.Machine = []
-        self.Machine.append(Individual(Pi, Ri, self.BufferArray[0], True))
+        self.Machine.append(Individual(Pi, Ri, None, self.BufferArray[0]))
         for i in range(self.MachineNumber-2):
-            self.Machine.append(Individual(Pi, Ri, self.BufferArray[i], self.BufferArray[i+1]))
-        # self.M2 = Individual(Pi, Ri, self.B1, self.B2)
-        # self.M3 = Individual(Pi, Ri, self.B2, self.B3)
-        self.Machine.append(Individual(Pi, Ri, self.BufferArray[2], False))
+            self.Machine.append(Individual(Pi, Ri, self.BufferArray[i],self.BufferArray[i+1]))
+        self.Machine.append(Individual(Pi, Ri, self.BufferArray[self.MachineNumber-2], None))
 
     def one_slot(self):
         # step 1: judge if runable
@@ -27,7 +25,7 @@ class MultiMachine:
         CR, M[0] = self.Machine[0].run_once()
         for i in range(self.MachineNumber-2):
             M[i+1] = self.Machine[i+1].run_once()[1]
-        PR, M[3] = self.Machine[self.MachineNumber-1].run_once()
+        PR, M[self.MachineNumber-1] = self.Machine[self.MachineNumber-1].run_once()
         WIP = []
         ST = []
         BL = []
