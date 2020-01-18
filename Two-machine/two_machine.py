@@ -17,11 +17,11 @@ class TwoMachine:
         CR, M1_s = self.M1.run_once()
         PR, M2_s = self.M2.run_once()
         WIP = self.B1.get_measure()
-        if M2_s and self.B1.check_null() is True:
+        if M2_s and self.B1.check_null():
             ST2 = 1
         else:
             ST2 = 0
-        if M1_s and (not M2_s) and self.B1.check_full() is True:
+        if M1_s and (not M2_s) and self.B1.check_full():
             BL1 = 1
         else:
             BL1 = 0

@@ -1,0 +1,15 @@
+\begin{tikzpicture}[shorten >=1pt,node distance=1.5cm,>=stealth,initial text=]
+  \tikzstyle{accepting}=[accepting by arrow]
+  \node[state,initial] (m1) {};
+  \node[draw,minimum height=1.5cm,minimum width=0.7cm] (b) [right of=m1] {};
+  \node[state,accepting](m2) [right of=b] {};
+  \node[node distance = 0.8cm](q1) [above of =m1] {$P_1,R_1$};
+  \node[node distance = 0.8cm](q2) [below of =m1] {$m_1$};
+  \node[node distance = 1cm](q3) [above of =b] {$N$};
+  \node[node distance = 1cm](q4) [below of =b] {$b$};
+  \node[node distance = 0.8cm](q5) [above of =m2] {$P_2,R_2$};
+  \node[node distance = 0.8cm](q6) [below of =m2] {$m_1$};
+
+  \path[->] (m1) edge node [above] {} (b)
+  (b) edge node [above] {} (m2);
+  \end{tikzpicture}

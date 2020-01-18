@@ -5,18 +5,6 @@ from buffer import Buffer
 class Individual:
 
     def __init__(self, P: float, R: float,
-                 B_f: Buffer, B_b: Buffer, X_init=False):
-        assert (0 <= P and P <= 1) is True
-        assert (0 <= R and R <= 1) is True
-        self.P = P  # breakdown probability
-        self.R = R  # repair probability
-        self.x_n = X_init  # state of x false represent down
-        self.flag_b_s = False
-        # True represents the machine is blockage or stravation
-        self.B_f = B_f  # Buffer forward
-        self.B_b = B_b  # Buffer backward
-
-    def __init__(self, P: float, R: float,
                  B: Buffer, flag: bool, X_init=False):
         assert (0 <= P and P <= 1) is True
         assert (0 <= R and R <= 1) is True
@@ -40,10 +28,10 @@ class Individual:
         NO_PRODUCT = 0
 
         if self.x_n is False:
-            if random.random() <= self.R:
+            if random.random() < self.R:
                 self.x_n = True
         else:
-            if random.random() <= self.P:
+            if random.random() < self.P:
                 self.x_n = False
 
         if (self.x_n and (not self.flag_b_s)):

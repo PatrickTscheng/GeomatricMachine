@@ -1,0 +1,13 @@
+    \begin{tikzpicture}[shorten >=1pt,node distance=2cm,>=stealth,initial text=]
+    \tikzstyle{every state}=[]
+    \tikzstyle{accepting}=[]
+    \tikzstyle{initial}= []
+
+    \node[state,initial]  (A)               {$0$};
+    \node[state,accepting](B) [right of=A]  {$1$};
+
+    \path[->] (A) edge [bend right=-35] node [above] {$R$}    (B)
+                  edge [loop left]      node {$1-R$}  (A)
+              (B) edge [bend left=35]   node [below] {$P$}    (A)
+                  edge [loop right]     node {$1-P$}  (B);
+    \end{tikzpicture}

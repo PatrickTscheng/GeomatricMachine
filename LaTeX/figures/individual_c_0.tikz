@@ -1,7 +1,13 @@
+\pgfplotsset{every axis legend/.style={
+  at={(0.99,0.5)},anchor=east,
+  shape=rectangle,fill=white,draw=black,
+  inner xsep=3pt,inner ysep=2pt,nodes={inner sep=2pt,text depth=0.15em}
+ }
+}
 \begin{tikzpicture}
   \begin{axis}[
     xlabel=n,ylabel=$x_i(n)$,xmin=0,xmax=40,
-    ymin=0,ymax=1]
+    ymin=0,ymax=1,grid=major]
     \addplot[blue,mark=none]  coordinates {
     (0,0)
     (1,0.2)
@@ -88,6 +94,8 @@
     (39,0.20001072702417289)
     (40,0.20000804526812976)
     };
+    \addlegendentry{$x_1(n)$}
+    \addlegendentry{$x_0(n)$}
   \end{axis}
 \end{tikzpicture}
 		

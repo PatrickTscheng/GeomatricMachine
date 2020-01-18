@@ -20,10 +20,3 @@ class Individual:
             if random.random() <= self.Pi:
                 self.x_n = 0
         return self.x_n
-
-    def run_finish(self) -> int:
-        i = 0
-        while i < self.n:
-            self.run_once()
-            i += 1
-        return self.x_n
