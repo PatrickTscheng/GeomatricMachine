@@ -15,6 +15,7 @@
 \usepackage{doku}
 \usepackage{german}
 \usepackage{longtable}
+\usepackage{cite}
 %\usepackage[draft]{graphicx}
 \usepackage{graphicx}
 \usepackage{graphics}
@@ -48,8 +49,9 @@
 \usepackage{pgfplots}
 \usetikzlibrary{arrows,snakes,backgrounds,automata}
 \usepgfplotslibrary{units}
+\graphicspath{{figures/}}
 %\usepackage{tocloft}
- 
+
 \renewcommand{\headrulewidth}{0.5pt}
 %\renewcommand{\footrulewidth}{0.5pt}
 %\renewcommand{cmd}{def}
@@ -277,19 +279,19 @@
 % % #######################################################################
 % % Inhaltsverzeichnis
 % % #######################################################################%
-% \clearpage
+\clearpage
 % %\pagenumbering{roman}
 
 % %\pagestyle{fancy}
 % %\fancyfoot[R]{\thepage}
 % %\pagestyle{myheadings}
-% \thispagestyle{fancy}
-% \lhead{\textsl{Contents}}
-% \rhead{\textbf{\textbf{iv}} }
-% \cfoot{}
-% \addtocontents{toc}{\protect\thispagestyle{fancy}}
-% \pdfbookmark[0]{Contents}{anchor}
-% \tableofcontents
+\thispagestyle{fancy}
+\lhead{\textsl{Contents}}
+\rhead{\textbf{\textbf{iv}} }
+\cfoot{}
+\addtocontents{toc}{\protect\thispagestyle{fancy}}
+\pdfbookmark[0]{Contents}{anchor}
+\tableofcontents
 
 % %\renewcommand{\headrulewidth}{1pt}
 % %\setlength{\baselineskip}{3ex}
@@ -298,23 +300,23 @@
 % %\renewcommand{\headrulewidth}{0pt}
 % %\afterpage{\lhead{new value}}
 
-% \clearpage
-% \setcounter{page}{5}
-% \thispagestyle{fancy}
-% \lhead{\textsl{List of Figures}}
-% \rhead{ \textbf{\thepage} }
-% \cfoot{}
-% \listoffigures
-% \addcontentsline{toc}{chapter}{\listfigurename}
+\clearpage
+\setcounter{page}{5}
+\thispagestyle{fancy}
+\lhead{\textsl{List of Figures}}
+\rhead{ \textbf{\thepage} }
+\cfoot{}
+\listoffigures
+\addcontentsline{toc}{chapter}{\listfigurename}
 
-% \clearpage
-% \setcounter{page}{8}
-% \thispagestyle{fancy}
-% \lhead{\textsl{List of Tables}}
-% \rhead{\textbf{\thepage}}
-% \cfoot{}
-% \listoftables
-% \addcontentsline{toc}{chapter}{\listtablename}
+\clearpage
+\setcounter{page}{8}
+\thispagestyle{fancy}
+\lhead{\textsl{List of Tables}}
+\rhead{\textbf{\thepage}}
+\cfoot{}
+\listoftables
+\addcontentsline{toc}{chapter}{\listtablename}
 % % #######################################################################
 % % Dokument
 % % #######################################################################

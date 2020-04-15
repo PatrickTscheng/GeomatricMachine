@@ -8,7 +8,7 @@
   \node[node distance = 1cm](q3) [above of =b] {$N$};
   \node[node distance = 1cm](q4) [below of =b] {$b$};
   \node[node distance = 0.8cm](q5) [above of =m2] {$P_2,R_2$};
-  \node[node distance = 0.8cm](q6) [below of =m2] {$m_1$};
+  \node[node distance = 0.8cm](q6) [below of =m2] {$m_2$};
 
   \path[->] (m1) edge node [above] {} (b)
   (b) edge node [above] {} (m2);

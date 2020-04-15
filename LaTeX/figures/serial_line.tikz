@@ -1,0 +1,28 @@
+\begin{tikzpicture}[shorten >=1pt,node distance=9mm,>=stealth,initial text=]
+    \tikzstyle{accepting}=[accepting by arrow]
+    \tikzstyle{every state} = [minimum size=14pt]
+    \tikzstyle{box} = [draw, minimum height=8mm, minimum width=4mm]
+    \node[initial,state] (m1) {};
+    \node[box] (b1) [right of=m1] {};
+    \node[state](m2) [right of=b1] {};
+    \node[state,draw= none,fill= none, minimum size=0pt](k1)[right of=m2]{};
+    \node[state,draw= none,fill =none, minimum size=0pt](k2)[right of=k1]{};
+    \node[state] (m3) [right of=k2]{};
+    \node[box] (b2) [right of=m3] {};
+    \node[state,accepting](m4) [right of=b2] {};
+  
+    \node[node distance = 0.6cm](q1) [below of =m1] {$m_1$};
+    \node[node distance = 0.7cm](q2) [below of =b1] {$b_1$};
+    \node[node distance = 0.6cm](q3) [below of =m2] {$m_2$};
+    \node[node distance = 0.6cm](q4) [below of =m3] {$m_{M-1}$};
+    \node[node distance = 0.7cm](q5) [below of =b2] {$b_{M-1}$};
+    \node[node distance = 0.6cm](q6) [below of =m4] {$m_M$};
+  
+    \path[->] (m1) edge node [above] {} (b1)
+    (b1) edge node [above] {} (m2)
+    (m2) edge node [above] {} (k1);
+    \draw[dotted, thick] (k1) to (k2);
+    \path[->]  (k2) edge node [above] {} (m3)
+    (m3) edge node [above] {} (b2)
+    (b2) edge node [above] {} (m4);
+    \end{tikzpicture}

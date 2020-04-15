@@ -1,0 +1,72 @@
+\begin{tikzpicture}[shorten >=1pt,node distance=9mm,>=stealth,initial text=]
+    \tikzstyle{accepting}=[accepting by arrow]
+    \tikzstyle{state1} = [state,minimum size=14pt]
+    \tikzstyle{state2} = [state,draw= none,fill= none, minimum size=0pt,inner sep=0pt]
+    \tikzstyle{box} = [draw, minimum height=8mm, minimum width=4mm]
+    \node[state2] (m0) {};
+    \node[state1] (m1) [right of= m0] {};
+    \node[box] (b1) [right of=m1] {};
+    \node[state1] (m2) [right of=b1] {};
+    \node[state2] (k1) [right of=m2]{};
+    \node[state2,node distance=7mm] (k2) [right of=k1]{};
+    \node[state1] (m3) [right of=k2]{};
+    \node[box] (b2) [right of=m3] {};
+  
+    \node[state2, node distance = 1.6cm] (m_0) [below of=m0] {};
+    \node[state1] (m_1) [right of= m_0] {};
+    \node[box] (b_1) [right of=m_1] {};
+    \node[state1] (m_2) [right of=b_1] {};
+    \node[state2] (k_1) [right of=m_2]{};
+    \node[state2,node distance=7mm] (k_2) [right of=k_1]{};
+    \node[state1] (m_3) [right of=k_2]{};
+    \node[box] (b_2) [right of=m_3] {};
+  
+    \node[state1, node distance = 1.13cm] (mc1) [below right of=b2]{};
+    \node[box] (bc1) [right of=mc1] {};
+    \node[state1] (mc2) [right of=bc1] {};
+    \node[state2] (kc1) [right of=mc2]{};
+    \node[state2,node distance=7mm] (kc2) [right of=kc1]{};
+    \node[state1] (mc3) [right of=kc2]{};
+    \node[box,node distance=7mm,draw= none,fill= none, minimum size=0pt,inner sep=0pt] (bc2) [right of=mc3] {};
+  
+    \node[node distance = 0.6cm](q1) [below of =m1] {$m_{11}$};
+    \node[node distance = 0.7cm](q2) [below of =b1] {$b_{11}$};
+    \node[node distance = 0.6cm](q3) [below of =m2] {$m_{12}$};
+    \node[node distance = 0.6cm](q4) [below of =m3] {$m_{1M_1}$};
+    \node[node distance = 0.7cm](q5) [below of =b2] {$b_{1M_1}$};
+    \node[node distance = 0.6cm](q_1) [below of =m_1] {$m_{21}$};
+    \node[node distance = 0.7cm](q_2) [below of =b_1] {$b_{21}$};
+    \node[node distance = 0.6cm](q_3) [below of =m_2] {$m_{22}$};
+    \node[node distance = 0.6cm](q_4) [below of =m_3] {$m_{2M_2}$};
+    \node[node distance = 0.7cm](q_5) [below of =b_2] {$b_{2M_2}$};
+  
+    \node[node distance = 0.6cm](qc1) [below of =mc1] {$m_{01}$};
+    \node[node distance = 0.7cm](qc2) [below of =bc1] {$b_{01}$};
+    \node[node distance = 0.6cm](qc3) [below of =mc2] {$m_{02}$};
+    \node[node distance = 0.6cm](qc4) [below of =mc3] {$m_{0M_0}$};
+  
+    \path[->] (m0) edge node [above] {} (m1)
+    (m1) edge node [above] {} (b1)
+    (b1) edge node [above] {} (m2)
+    (m2) edge node [above] {} (k1)
+    (k2) edge node [above] {} (m3)
+    (m3) edge node [above] {} (b2)
+    (b2) edge node [above] {} (mc1)
+    (m_0) edge node [above] {} (m_1)
+    (m_1) edge node [above] {} (b_1)
+    (b_1) edge node [above] {} (m_2)
+    (m_2) edge node [above] {} (k_1)
+    (k_2) edge node [above] {} (m_3)
+    (m_3) edge node [above] {} (b_2)
+    (b_2) edge node [above] {} (mc1)
+    (mc1) edge node [above] {} (bc1)
+    (bc1) edge node [above] {} (mc2)
+    (mc2) edge node [above] {} (kc1)
+    (kc2) edge node [above] {} (mc3)
+    (mc3) edge node [above] {} (bc2)
+    ;
+    \draw[dotted, thick] (k1) to (k2)
+    [dotted, thick] (k_1) to (k_2)
+    [dotted, thick] (kc1) to (kc2);
+    % (b2) edge node [above] {} (m4);
+    \end{tikzpicture}

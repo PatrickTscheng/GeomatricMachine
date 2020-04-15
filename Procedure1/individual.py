@@ -10,7 +10,7 @@ class Individual:
         assert (0 <= Ri and Ri <= 1) is True
         self.Pi = Pi  # breakdown probability
         self.Ri = Ri  # repair probability
-        self.x_n = X_init  # state of x false represent down
+        self.x_n = random.random() < 0.5  # state of x false represent down
         self.flag_b_s = False
         # True represents the machine is blockage or stravation
         if B_f is  None:  # flag is a special condition control the first(true) and last one(false)
