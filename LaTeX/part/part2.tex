@@ -1,119 +1,187 @@
-\chapter{Analysis of the Paper}
-\label{C_Kapitel}
+\chapter{Model and Performance Measures}
+\label{B_Kapitel}
+\noindent This chapter mainly focus on the mathmatical model, the first part introduces the theoretical basis of the mathmatical mode, and the assumptions to build such mathmatical model, the second part presents the performance measures of transient properties.
+
 % #######################################################################
-\section{one machine model}
-\noindent the Figure~\ref{State transition diagram of one geometric machine} is a model of geometric machine
+\section{Model}
+\noindent Before the discussion of the mathmatical mode, the classic conception of Markov chain should be first introduced as the theoretical basis of stochastic models to describe a process of real world. This made the foundation of for general stochastic simulation methods known such as Markov chain Mente Carlo, which are suitable for simulating sampling from comlex probability distributions, and also able to be applied in Bayesian statistics and artificial intelligence. Besides, for serial production lines with geometric machines and finite buffers, in particular, there are more assumptions to describe and derive such a system.
+
+% #######################################################################
+\subsection{Markov chain}
+\noindent A Markov chain is a stochastic model basically describing a sequence of random events in which the probability of each event is related only to the state attained in the previous event \cite{gagniuc2017markov}. In time-continuous situation, it is known as Markov process. It is named after the Russian mathematician Andrey Markov. 
+
+Here is a diagram (see Figure \ref{a two state markov process}) representing a two state Markov process, where the states are labelled as A and B respectively. Every number represents the probability of the Markov process transforming from one state to another state with the arrow that indicates the direction. For instance, if the Markov process is now in state B, then the probability it transforms to state A is 0.6, while the probability it remains in state B is 0.4.
 
 \begin{figure}[!h]
 	\centering
-	\includegraphics[]{figures/model_of_one_machine.tikz}
-	\caption{State transition diagram of one geometric machine}
-	\label{State transition diagram of one geometric machine}
+	\includegraphics[]{a_markov_model.tikz}
+	\caption{A two-state Markov process}
+	\label{a two state markov process}
 \end{figure}
 
-% \begin{math}x(n+1)=A_1 x(n)\end{math}
-the production rate and consumption rate of an individual machine with the original state of down(0) can be calculated as 
-\begin{displaymath} PR(n)=CR(n)=x_1(n)=\begin{bmatrix} 0&1 \end{bmatrix}x(n)=\begin{bmatrix} 0&1 \end{bmatrix}A_1^n
-x(0) \end{displaymath}
-where
-\begin{displaymath} A_1 = \begin{bmatrix} 1-R&P\\R&1-P \end{bmatrix} \end{displaymath}
+The precise definition of the conception ''Markov chain'' will be given as following. A Markov process is a certain type of stochastic process distiguished by the Markov property \cite{chung1967markov}. A Markov chain is a Markov process with a calculable (namely, finit or denumerably infinite) number of states. The time parameters can be taken as the set of nonnegative integers or the set of nonnegative real numbers, so we have discrete parameter cases or continuous parameter cases. The adjective ''simple'' is sometimes used to qualify the Markov chain, but since we really do not discuss the ''multiple'' chains we should not treat it differently. In addition, we should only discuss the Markov chains which has a '' stationary (or temporally homogeneous) transition probabilities'' so that the qualifying expression in quotes will be understood. In the end, our discussion does not distinguish between a finite or a calculable infinite number of states and therefore we does not do any special treatment for the former case.
 
-the Figure~\ref{Transients of an individual geomatric machine when it is initially down} is the contrast of simulation and calculation of one geometric machine with initial state of down with the parameters of breakdown
-probability $P = 0.05$ and repair probability $R = 0.2$.
+In this part we handle the case of a discrete parameter. Here the essential foundations can be summarized as follows.
 
-\begin{figure*}[!h]
+Suppose we have an abstract set $ \probspace $ , called the probability space, having the generic element $ \genericelement $, called elementary event; a Borel field $\Borelfield $ of subsets of $ \probspace $ , called measurable sets or events, where $\probspace$ is considered as a member; and a probability measure $\probmeasure $ defined on $\Borelfield $. The triple $\parens{\probspace, \Borelfield, \probmeasure} $ is named as a probability triple. A set in $\Borelfield$ of probability zero will be named as a null set; ''almost all $\genericelement$ (a.a.$\genericelement$)'' or ''almost everywhere (a.e.)'' expresses ''all $\genericelement$ except a null set''. The pair $\parens{\Borelfield, \probmeasure} $ will be regarded to be complete in the sense that each subset of a null set is attached to $\Borelfield$ and is a null set. If and only if a Borel subfield of $\Borelfield$ contains all null sets, it is said to be augmented. If a Borel subfield is given, there exists a unique smallest augmented Borel subfield of $\Borelfield$ including the given one. Unless exceptions specified all the following Borel fields will be presumed to be augmented. A (real) random variable is regarded as a single-valued function from a set $\domainod$ in $\Borelfield$ to the closed real line $X = [-\infty,+\infty]$ thus for every real number $c $ the set of $\genericelement$ in $\domainod$ for which $x(\genericelement) \leq c$ is attached to $\Borelfield$. $\domainod$ is named as the domain of definition of $x$ and the set $\domainof$ of $\genericelement$ in $\domainod$ for which $|x(\genericelement)|<\infty$ is named as the domain of finiteness of $x$. If neither domain is specific it will be figured out that $\probmeasure(\domainof)=1$; otherwise stated, the random variable is finite-valued. It comes from the definition that if $A$ is any Borel set in $X$, then the set of $\genericelement $ for which $x(\genericelement)\in A$, to be symbolized as ${\genericelement:x(\genericelement)\in A}$ is attached to $\Borelfield$. The probability of the set comes to be denoted by
+\begin{equation}
+\probmeasure \{ x(\genericelement)\in A \}.
+\end{equation}
+Symbols alike to these which will come later should be self-explanatory if we mark that commas or semicolons are served as symbolizing intersection of sets; for instance
+\begin{equation}
+    \begin{aligned}
+    \probmeasure\{x_\nu(\genericelement)\leq c_\nu,1\leq \nu\leq 2\}&=\probmeasure\{x_1(\genericelement)\leq c_1; x_2(\genericelement)\leq c_2\} \\ &= \probmeasure\left\{\cap_{n=1}^2 [x_n(\genericelement)\leq c_n]\right\}.
+    \end{aligned}
+\end{equation}
+Suppose we hold a set $\{x_s, s\in S\}$ of random variables, the Borel field created by them is the smallest augmented Borel field regarding which all the random variables in the set are able to be measured. Special cases are $\Borelfield\{x_s,s\circ t\}$ where $\circ$ is one of the four symbols $<, \leq , >, \geq$.
+
+The function $F$ described by
+\begin{equation}
+    F(u)=\probmeasure\{x(\genericelement)\leq u\}
+\end{equation}
+for all real $u$ is named as the distribution function of $x$. We get such that
+\begin{equation}
+    \lim_{u\to +\infty} F(u) - \lim_{u\to -\infty} F(u) = \probmeasure(\domainof).
+\end{equation}
+Unless otherwise stated, we will use a distribution function or a probability distribution that of a random variable which is limited with probability one to represent. Thus $\lim_{u\to -\infty} F(u) = 0$, $\lim_{u\to +\infty} F(u) = 1$. A random variable $x$ is discrete if and only if there exists a calculable set $A$ thus $P\{x(\genericelement)\in A\} = 1$. A possible value $c$ of $x$ is just one like $\probmeasure\{x(\genericelement)=c\}>0$. All random variables engaged in the part are discrete. A function $x$ from $\domainod$ in $\Borelfield$ to a calculable set $A$ can be taken as a random variable if and only if the set $\{ \genericelement : x(\genericelement) = c\}$ is attached to $\Borelfield$ for every $c$ in $A$. Actually $A$ could be assigned as any abstract calculable set and we could define an abstract-valued random variable like this.
+
+Suppose $\Lambda_1$ and $\Lambda_2$ are two sets in $\Borelfield$, the conditional probability of $\Lambda_2$ in relation to $\Lambda_1$ is defined By
+\begin{equation}
+    \probmeasure(\Lambda_2|\Lambda_1) = \frac{\probmeasure(\Lambda_1 \Lambda_2)}{\probmeasure(\Lambda_1)}
+\end{equation}
+given that $\probmeasure(\Lambda_1)>0$. When $\probmeasure(\Lambda_1)=0$, $\probmeasure(\Lambda_2|\Lambda_1)$ is undefined. For convenience, undefined conditional probabilities will often be seen in following. If one that comes our from them is multiplied by a variable which is equal to 0, the product is considered to be 0. The conditional probability of the set $\{\genericelement :x_3(\genericelement) = c_3\}$ in relation to the set $\cap_{n-1}^2 \{\genericelement : x_n(\genericelement)=c_n\}$ for example is symbolized as
+\begin{equation}
+    \probmeasure\{x_3(\genericelement)=c_3|x_1(\genericelement)=c_1, x_2(\genericelement)=c_2\}.
+\end{equation}
+
+For the random variables $\{x_\nu, 1\leq \nu \leq n\}$, it is not necessarily finite-valued, and is said to be independent in case
+\begin{equation}
+\probmeasure \left\{\bigcap_{\nu=1}^n [x_\nu(\genericelement)\leq c_\nu]\right\} = \prod_{\nu =1}^n \probmeasure\{x_\nu (\genericelement)\leq c_\nu\}
+\end{equation}
+for any real finite $c_\nu$, $1\leq \nu \leq n$. It comes out that the same equation remains true if the sets $\{\genericelement :x_\nu (\genericelement)\leq c_\nu\}$ are changed to the more general sets ${\genericelement :x_\nu(\genericelement)\in A_\nu}$ where the $A_\nu$ are Borel sets in $X$. Suppose we habe a sequence $\{x_n,n\geq 1\}$, it is a sequence of independent random variables only if any finite number of them are independent. The denumerable sets $\Lambda_\nu$, $1\leq \nu \leq n$ or $1\leq \nu < \infty$ are independent only if their indicators are, the indicator of a set rendered as the function which on the set end is equal to one zero elsewhere.
+
+The mathmatical expectation of a random variable $x$ can be give by the abstract Lebesgue-Stieltjes integral
+\begin{equation}
+    \expectation(x) = \int_{\probspace} x(\genericelement) \probmeasure(d\genericelement).
+\end{equation}
+In general, we extend this definition to a random variable that supposes that only if the integral existing, one of two values $+\infty$ or $-\infty$ with positive probability is finite or infinite. The conditional expectation of $x$ relative to $\Lambda$, provided $\Lambda \in \Borelfield$, is defined as
+\begin{equation}
+    \expectation(x|\Lambda) = \int_{\probspace}x(\genericelement) \probmeasure(d\genericelement|\Lambda) = \frac{\int_{\probspace}x(\genericelement) \probmeasure(d\genericelement)}{\probmeasure(\Lambda)}.
+\end{equation}
+Specially if $x$ is discrete with all its probable quantities in the measurable set $A$ then
+\begin{equation}
+    \expectation(x|\Lambda)=\frac{1}{\probmeasure} \sum_{i\in A} i\probmeasure\{\Lambda; x(\genericelement)= i\}
+\end{equation} 
+as long as the series is fully converged.
+
+In this part the letters $n, m, \nu, r ,s ,t $ denote non-negative integers unless otherwise stated.
+
+A discrete parameter stochastic process is described as a sequence of random variables $\{x_n, n\geq 0\}$ defined regarding a probability triple $(\probspace, \Borelfield, \probmeasure)$. If all random variables are discrete, the union $\statespace$ of all probable quantities of all $x_n$ is a countable set named as the minimum state space of the process and every element of $\statespace$ is a state. Therefore, $i\in \statespace$ if and only if there is an $n \geq O$ so as $\probmeasure\{x_n(\genericelement) = i\} >  O$. We take from the language of physics where the term ''state'' indicates that of a  material system whose evolution in time is characterized by our stochastic process model.
+
+A discrete parameter Markov chain can be defined by a sequence of discrete random variables $\{x_n, n\geq O\}$ possessing the under property: for arbitrary $n \geq 2$, $O\geq t_1 < ... < t_n$ and arbitrary $i_1, ... , i_n$ in the state space $\statespace$ we have
+\begin{equation}
+    \left\{
+        \begin{aligned}
+       \probmeasure \{x_{t_n}(\genericelement) &= i_n | x_{t_1}(\genericelement) = i_1, ... ,x_{t_{n-1}}(\genericelement) = i_{n-1}\} \\
+       &= \probmeasure\{x_{t_n}(\genericelement) = i_n | x_{t_{n-1}}(\genericelement) = i_{n-1}\} .
+        \end{aligned}
+    \right.
+    \label{state space}
+\end{equation} 
+whenever the left member is defined. The condition \ref{state space} will appear as the Markov property. It is identical to the under apparently weaker condition: for each $n\geq 1$,
+\begin{equation}
+    \begin{aligned}
+        \probmeasure \{x_n(\genericelement) &= i_n| x_0(\genericelement) = i_0,...,x_{n-1}(\genericelement)=i_{n-1}\} \\ &=\probmeasure \{x_n(\genericelement)=i_n|x_{n-1}(\genericelement)=i_{n-1}\}.
+    \end{aligned}
+\end{equation}
+The proof here is neglected. An important consequence comes from condition \ref{state space} is that for arbitrary $n \geq 0$ and $0\leq t_1<...<t_n...<t_{n+m}$; and arbitrary $i_1,...,i_n,...mi_{n+m}$ in $\statespace$ we get
+\begin{equation}
+    \left\{
+        \begin{aligned}
+            \ & \probmeasure\{x_{t_\nu}(\genericelement)=i_\nu, n\leq \nu \leq n+m|x_{t_\nu}(\genericelement)=i_\nu, 1\leq \nu \leq n-1\} \\
+            =& \probmeasure \{x_{t_\nu}(\genericelement) = i_\nu, n\leq \nu \leq n+m|x_{t_{n-1}}(\genericelement)=i_{n-1}\}.
+        \end{aligned}
+        \right.
+        \label{state space2}
+\end{equation}
+The proof of \ref{state space2} is carried out by induction on $m$. For $m = 0$, it decreases to \ref{state space}. Supposing that \ref{state space2} is true for a certain quantity of $m$, it comes to use the rules of combining conditional probabilities and \ref{state space},
+\begin{equation}
+    \begin{aligned}
+        \ & \probmeasure\{x_{t_\nu}(\genericelement)=i_\nu, n\leq \nu \leq n+m+1|x_{t_\nu}(\genericelement)=i_\nu, 1\leq \nu \leq n-1\} \\
+        =& \probmeasure\{x_{t_\nu}(\genericelement)=i_\nu, n\leq \nu \leq n+m|x_{t_\nu}(\genericelement)=i_\nu, 1\leq \nu \leq n-1\} \times \\
+        \times & \probmeasure\{x_{t_{n+m+1}}(\genericelement)=i_{n+m+1}|x_{t_\nu}(\genericelement)=i_\nu, 1\leq \nu \leq n+m\} \\
+        =& \probmeasure\{x_{t_\nu}(\genericelement)=i_\nu, n\leq \nu \leq n+m|x_{t_{n-1}}(\genericelement)=i_{n-1}\} \times \\
+        \times & \probmeasure\{x_{t_{n+m+1}}(\genericelement)=i_{n+m+1}|x_{t_{n+m}}(\genericelement)=i_{n+m}\} \\
+        =& \probmeasure\{x_{t_\nu}(\genericelement)=i_\nu, n\leq \nu \leq n+m|x_{t_{n-1}}(\genericelement)=i_{n-1}\} \times \\
+        \times & \probmeasure\{x_{t_{n+m+1}}(\genericelement)=i_{n+m+1}|x_{t_{\nu}}(\genericelement)=i_{\nu}, n - 1\leq \nu \leq n+m\} \\
+        =& \probmeasure\{x_{t_\nu}(\genericelement)=i_\nu, n\leq \nu \leq n+m+1|x_{t_{n-1}}(\genericelement)=i_{n-1}\}.
+    \end{aligned}
+\end{equation} 
+Therefore \ref{state space2} is true when $m$ is replaced by $m+1$ and the induction is complete.
+
+It is well know that a result comes from measure theory asserts that for all $m$ the validity of \ref{state space2} indicates that of the more general result: for each $\markovproperty \in \Borelfield \{x_t, t\geq t_n\}$ we get
+\begin{equation}
+    \probmeasure \{\markovproperty | x_{t_\nu}(\genericelement) = i_\nu, 1\leq \nu \leq n\} = \probmeasure \{\markovproperty | x_{t_n}(\genericelement)= i_n\}.
+    \label{markov property}
+\end{equation}
+In this expression Markov property can be expressed verbally as positing that ''If we know the state of an event at the previous moments, the probability of it is the same as only the last given state''. More vaguely, it can be presented that ''the past state is completely independent from the future state''. Misleading by these description, it is a normal mistake to believe that Equation \ref{markov property} stays true if the conditional events in it are replaced by a more general event, for instance, replacing $i_\nu$ with $A_\nu$, where $A_\nu$ is a subset of $\statespace$. No doubt the resulting equation will generally be wrong. Nevertheless, the under extension of \ref{markov property} is correct and trivial: if $\Lambda \in \Borelfield\{x_t,t\leq t_n\}$
+\begin{equation}
+    \probmeasure \{\markovproperty | \Lambda ; x_{t_n}(\genericelement)= i \} = \probmeasure\{\markovproperty |x_{t_n}(\genericelement)= i\}.
+\end{equation}
+
+% #######################################################################
+\subsection{Descriptive Model}
+\noindent Consider a production line shown in Figure \ref{serial production line}, in which circles illustrate machines and rectangles illustrate buffers. The system will be defined by the under assumptions.
+
+\begin{figure*}[!ht]
 	\centering
-	\subfigure[Result of simulation]{
-		\includegraphics[width=6.5cm]{figures/individual_s_0.tikz}
-		\label{individual simulation down}}
-	\subfigure[Result of calculation]{
-		\includegraphics[width=6.5cm]{figures/individual_c_0.tikz}	
-	 	\label{individual calculation down}}
-	\caption{Transients of an individual geomatric machine when it is initially down}
-	\label{Transients of an individual geomatric machine when it is initially down}
+	\includegraphics{serial_line.tikz}
+	\caption{Serial production line.}
+	\label{serial production line}.
 \end{figure*}
 
-the Figure~\ref{Transients of an individual geomatric machine when it is initially up} is the contrast of simulation and calculation of one geometric machine with initial state of up and the paramter is same with the fore figure
+% from this part need to change some way
 
-\begin{figure*}[!h]
-	\centering
-	\subfigure[Result of simulation]{
-		\includegraphics[width=6.5cm]{figures/individual_s_1.tikz}
-		\label{individual simulation up}}
-	\subfigure[Result of calculation]{
-		\includegraphics[width=6.5cm]{figures/individual_c_1.tikz}	
-	 	\label{individual calculation up}}
-	\caption{Transients of an individual geomatric machine when it is initially up}
-	\label{Transients of an individual geomatric machine when it is initially up}
-\end{figure*}
+\begin{itemize}
+    \item[1.] The system is composed of $M$ machines, arranged in series, and $M-1$ buffers between each consecutive pair of machines.
+    \item[2.] The machines all have the same constant cycle time $\tau$. The time axis is limited in a slot duration $\tau$. Machines start to operate at the beginning of each time slot.
+    \item[3.] The machines obey the geometric reliability model: Let $s_i(n) \in \{0 = down, 1 = up\} $ denote the state of machine $m_i$ during time slot $n, i = 1, . . . , M$. Then, the transition probabilities are given by
+    \begin{equation}
+        \begin{aligned}
+            Prob[s_i(n+1)=0|s_i(n)=1]=&P_i \\
+            Prob[s_i(n+1)=1|s_i(n)=1]=&1-P_i \\
+            Prob[s_i(n+1)=1|s_i(n)=0]=&R_i \\
+            Prob[s_i(n+1)=0|s_i(n)=0]=&1-R_i
+        \end{aligned}
+        \label{transition probabilities}
+    \end{equation}
+    where $ P_i $ and $R_i$ are referred to as the breakdown and repair probabilities, respectively. All machines operate independently from one another.
+    \item[4.] Each buffer is characterized by its capacity (in other words, the maximum number of parts the buffer can hold), $1 \leq N_i < \infty$, $i = 1, . . . , M-1$.
+    \item[5.] Machine $m_i, i = 2, . . . , M$, is starved during a time slot if it is up and buffer $b_{i-1}$ is empty at the beginning of the time slot. Machine $m_1$ is never starved for raw material.
+    \item[6.] Machine $m_i,i = 1,...,M-1$, is blocked during a time slot if it is up, buffer $b_i$ has $N_i$ parts at the beginning of the time slot, and machine $m_{i+1}$ fails to take a part during the time slot. Machine $m_M$ is never blocked.
+    \item[7.] If a machine is up and neither starved or blocked, it processes one part in one time slot (i.e., takes one part from its upstream buffer at the beginning of the time slot, processes it during the time slot, and sends it to its downstream buffer at the end of the time slot); otherwise, no processing takes place for the machine in this time slot.
+    \item[8.] The system oprerates for a total of T time slots.
+\end{itemize}
 
-\section{two machine model}
-\noindent the Figure~\ref{State transition diagram of two geometric machine with buffer} is the mathmatic model of two machine geometric serial line 
-\begin{figure}[!h]
-	\centering
-	\includegraphics[]{figures/model_of_two_machine_with_buffer.tikz}
-	\caption{State transition diagram of two geometric machine with buffer}
-	\label{State transition diagram of two geometric machine with buffer}
-\end{figure}
+\textsl{Remark 1}: Under the assumption 3. the up- and downtime of machine $m_i$ are geometric random variables. The average of its up- and downtime can be calculated as $T_{up,i}=1 / P_i$ and $T_{down,i} = 1/ R_i$, respectively. In addition, the machine efficiency, i.e., the probability (proportion of time) that $m_i$ is up in steady state, can be calculated as $e_i=T_{up,i}/(T_{up,i}+T_{down,i}) = R_i/(R_i + P_i)$.
 
-the Figure~\ref{Transients of a two-machine geometric line} is the the result of simulation of two machine with buffer with the paramters of $P_1 = 0.03, R_1 = 0.18, P_2 = 0.06, R_2 = 0.21,$ Buffer $ N = 10$.
+\textsl{Remark 2}: The geometric reliability model is usually applicable, when the machine's average downtime is much longer than its cycle time (e.g., in machining, heat treatment, washing operations). Steady state behavior of the geometric serial lines has been studied in a number of publications in production systems research \cite{papadopolous1993queueing,buzacott1993stochastic, gershwin1994manufacturing,altiok1997performance} The geometric model has also been successfully applied in industrial case studies (see, for instance, \cite{li2003due, liberopoulos2007performance}).
 
-\begin{figure*}[!h]
-	\centering
-	\subfigure[]{
-		\includegraphics[width=0.45\linewidth,height=0.35\linewidth]{figures/two_machine_pr_and_cr.tikz}
-		\label{two machine pr and cr}}
-	\subfigure[]{
-		\includegraphics[width=0.45\linewidth,height=0.35\linewidth]{figures/two_machine_wip.tikz}	
-		 \label{two machine wip}}
-	\subfigure[]{
-		\includegraphics[width=0.45\linewidth,height=0.35\linewidth]{figures/two_machine_bl_and_st.tikz}	
-		\label{two machine bl and st}}
-	\caption{Transients of a two-machine geometric line. (a) $PR(n)\ and\ CR(n)$;(b) $WIP(n)$; (c) $ST_2(n)\ and\ BL_2(n)$}
-	\label{Transients of a two-machine geometric line}
-\end{figure*}
-~\\
-a significant difference can be found between the Figure~\ref{two machine bl and st} and the original Figure~\ref{st_bl_origin}
+\textsl{Remark 3}: The above assumptions imply that the failures are time-dependent (i.e., a machine may break down during starvation or blockage). Another failure model alternative, operation-dependent failure (i.e., a machine cannot break down during starvation or blockage), is also used in the literature. The behavior and performance of systems defined by both conventions are very similar (see \cite{li2006comparisons}). In this paper we consider time-dependent failures.
+
+\textsl{Remark 4}: Assumption 6. implies the blocked-before-service (BBS) convention, under which, a machine may be starved and blocked during the same time slot. Its counterpart, the blocked-after-service (BAS) convention, is also widely used in production systems research (see \cite{dallery1992manufacturing, papadopoulos1996queueing,li2009throughput}). The analysis of systems defined by both conventions are similar. In fact, a system model under one convention can be converted to the model with the other convention by modifying the buffer capacity by one unit. In this paper we use BBS convention, since it leads to a simpler description \cite{li2008production}.
+
+Production systems with machines having other reliability models (e.g., exponential, Weibull, gamma, log-normal, and empirical, etc.) and non-identical cycle times will be studied in future work.
 
 
-\begin{figure*}[!h]
-	\centering
-	\includegraphics[width=0.45\linewidth]{figures/st-bl-origin.jpg}
-	\caption{Transients of a two-machine geometric line $ST_2(n) \ and\ BL_2(n)$}
-	\label{st_bl_origin}
-\end{figure*}
-
-~\\
-Parameters of aggregated machines in a two-machine geometric
-serial line.
-
-\begin{figure*}[!h]
-	\centering
-	\includegraphics[width=0.45\linewidth]{figures/two_machine_aggregated.tikz}
-	\caption{Parameters of aggregated machines in a two-machine geometric serial line.}
-	\label{two machines aggregated}
-\end{figure*}
-
-\section{multi machine model}
-\noindent the following is the part about multi geometric machines with four machine and the parameters are 
-$P_i = 0.05, R_i = 0.2, i = 1,...,4; N_i = 5, i = 1,...,3.$
-
-\begin{figure*}[!h]
-	\centering
-	\subfigure[]{
-		\includegraphics[width=0.45\linewidth,height=0.35\linewidth]{figures/four_machine_pr_and_cr.tikz}
-		\label{four machine pr and cr}}
-	\subfigure[]{
-		\includegraphics[width=0.45\linewidth,height=0.35\linewidth]{figures/four_machine_wip.tikz}	
-		 \label{four machine wip}}
-	\subfigure[]{
-		\includegraphics[width=0.45\linewidth,height=0.35\linewidth]{figures/four_machine_st.tikz}	
-		\label{four machine st}}
-	\subfigure[]{
-		\includegraphics[width=0.45\linewidth,height=0.35\linewidth]{figures/four_machine_bl.tikz}	
-		\label{four machine bl}}
-	\caption{Transients of a four-machine geometric line. (a) $PR(n) \ and\ CR(n)$;(b) $WIP(n)$; (c) $ST_i(n)$;(d) $BL_i(n)$.}
-	\label{Transients of a four-machine geometric line}
-\end{figure*}
-
-meanwhile, the original figures show the result of the writer
+\section{Performance Measures}
+\label{performance measures}
+\noindent To carry out rigorous real-time analysis and control of production systems, transient performance measures must be defined. In the framework of geometric serial lines defined by assumptions 1-8, the performance measures of interest are:
+\begin{itemize}
+    \item[$\bullet$] \textsl{Production Rate}, $PR(n) = $ the expected number of finished parts produced by $m_M$ in time slot $n$;
+    \item[$\bullet$] \textsl{Consumption Rate}, $CR(n)=$ the expected number of raw parts consumed by $m_1$ in time slot $n$;
+    \item[$\bullet$] \textsl{Work-in-process}, $WIP_i(n)=$ the expected number of parts in buffer $b_i$ at the beginning of time slot $n$, $i=1,...,M-1$;
+    \item[$\bullet$] \textsl{Machine Starvation}, $ST_i(n)=$ Prob[$m_i$ is starved by $b_{i-1}$ in time slot $n$], $i=2,...,M$;
+    \item[$\bullet$] \textsl{Machine Blockage},$ BL_i(n)=$ Prob[$m_i$ is blocked by $b_i$ in time slot $n$], $ i=1,...,M-1$.
+\end{itemize}
+In this paper, we develop analytical methods to calculate these transient performance measures. It should be noted that, in this paper, the term “analytical” refers to formula-based calculation methods (either exact or approximate) as opposed to computer simulation.
