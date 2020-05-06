@@ -7,21 +7,21 @@ from multi_machine import MultiMachine
 class procedure1:
     
 
-    def __init__(self, MachineNumber = 4):
+    def __init__(self, MachineNumber = 5):
         self.MachineNumber = MachineNumber
 
         # production_lines = 1#10000 # production lines
         n = 150  # slot of time
-        simulation_num = 200000
-        process_all = 1
+        simulation_num = 100000
+        process_all = 20
 
-        self.calculation, args=( 4, production_lines, n, simulation_num
-        # for i in range(process_all):
-        #     Process(target=self.calculation, args=( i, production_lines, n, simulation_num)).start()
+        # self.calculation( 4, n, simulation_num)
+        for i in range(process_all):
+            Process(target=self.calculation, args=( i, n, simulation_num)).start()
 
 
 
-    def calculation(self, process_num, production_lines, n, simulation_num):
+    def calculation(self, process_num, n, simulation_num):
         # Ri = [random.uniform(0.05, 0.5) for i in range(production_lines)]  # repair probability 
         # # while(Ri == 0.05 or Ri == 0.5):
         # #     Ri = random.uniform(0.05, 0.5)
@@ -35,46 +35,46 @@ class procedure1:
         N = process_num +1  # Buffer space
         
         indi = []
-        PR = [[] for i in range(production_lines)]
-        CR = [[] for i in range(production_lines)]
-        WIP = [[] for i in range(production_lines)]
-        ST = [[] for i in range(production_lines)]
-        BL = [[] for i in range(production_lines)]
+        PR = [] #[] for i in range(production_lines)]
+        CR = [] #[] for i in range(production_lines)]
+        WIP = []#[] for i in range(production_lines)]
+        ST = []#[] for i in range(production_lines)]
+        BL = []#[] for i in range(production_lines)]
 
         # for i in range(production_lines):  # initial
         #     indi.append(MultiMachine(Pi[i], Ri[i], N[i], self.MachineNumber))
 
-        for m in range(production_lines):
-            for i in range(simulation_num):  # initial
-                indi.append(MultiMachine(Pi, Ri, N, self.MachineNumber))
+        # for m in range(production_lines):
+        for i in range(simulation_num):  # initial
+            indi.append(MultiMachine(Pi, Ri, N, self.MachineNumber))
 
-            for i in range(n):
-                PR[m].append(0)
-                CR[m].append(0)
-                WIP[m].append([0 for j in range(self.MachineNumber-1)])
-                ST[m].append([0 for j in range(self.MachineNumber-1)])
-                BL[m].append([0 for j in range(self.MachineNumber-1)])
-                
-
-                for j in range(simulation_num):
-                    
-                    pr_t, cr_t, wip_t, st_t, bl_t = indi[j].one_slot()
-                    PR[m][i] += pr_t
-                    CR[m][i] += cr_t
-                    for k in range(self.MachineNumber-1):
-                        WIP[m][i][k] += wip_t[k]
-                        ST[m][i][k] += st_t[k]
-                        BL[m][i][k] += bl_t[k] 
-                    
-                PR[m][i] = PR[m][i]/simulation_num
-                CR[m][i] = CR[m][i]/simulation_num
-                for k in range(self.MachineNumber-1):
-                        WIP[m][i][k] = WIP[m][i][k]/simulation_num
-                        ST[m][i][k] = ST[m][i][k]/simulation_num
-                        BL[m][i][k] = BL[m][i][k]/simulation_num
-                # print(m,i)
+        for i in range(n):
+            PR.append(0)
+            CR.append(0)
+            WIP.append([0 for j in range(self.MachineNumber-1)])
+            ST.append([0 for j in range(self.MachineNumber-1)])
+            BL.append([0 for j in range(self.MachineNumber-1)])
             
-            indi = []
+
+            for j in range(simulation_num):
+                
+                pr_t, cr_t, wip_t, st_t, bl_t = indi[j].one_slot()
+                PR[i] += pr_t
+                CR[i] += cr_t
+                for k in range(self.MachineNumber-1):
+                    WIP[i][k] += wip_t[k]
+                    ST[i][k] += st_t[k]
+                    BL[i][k] += bl_t[k] 
+                
+            PR[i] = PR[i]/simulation_num
+            CR[i] = CR[i]/simulation_num
+            for k in range(self.MachineNumber-1):
+                    WIP[i][k] = WIP[i][k]/simulation_num
+                    ST[i][k] = ST[i][k]/simulation_num
+                    BL[i][k] = BL[i][k]/simulation_num
+            # print(m,i)
+        
+        # indi = []
  
         # steady paramter PRss and CRss calcualtion
         # steady_sim = 20
@@ -84,7 +84,7 @@ class procedure1:
         # CRss = [0 for i in range(production_lines)]
         # for m in range(production_lines):
         #     for i in range(steady_sim):  # initial
-        #         indi.append(MultiMachine(Pi[m], Ri[m], N[m], self.MachineNumber))
+        #         indi.append(MultiMachine(Pi, Ri, N, self.MachineNumber))
 
         #     for i in range(steady_warmup):
 
@@ -103,8 +103,8 @@ class procedure1:
         #             Prss[i][j] = pr_t
         #             Crss[i][j] = cr_t
         #             # print(pr_t,cr_t)
-        #     PRss[m] = np.mean(Prss).item()
-        #     CRss[m] = np.mean(Crss).item()
+        #     PRss = np.mean(Prss).item()
+        #     CRss = np.mean(Crss).item()
             
         #     indi = []
         
@@ -112,39 +112,39 @@ class procedure1:
 
 
         str_out = ''
-        for m in range(production_lines):
+        # for m in range(production_lines):
+        i = 1
+        str_out += 'PR\n'
+        for e in PR:
+            str_out += '(' + str(i) + ',' + str(e) + ')\n'
+            i += 1
+
+        i = 1
+        str_out += 'CR\n'
+        for e in CR:
+            str_out += '(' + str(i) + ',' + str(e) + ')\n'
+            i += 1
+
+        for j in range(self.MachineNumber-1):
             i = 1
-            str_out += 'PR\n'
-            for e in PR[m]:
-                str_out += '(' + str(i) + ',' + str(e) + ')\n'
+            str_out += str(j+1) + 'WIP\n'
+            for e in WIP:
+                str_out += '(' + str(i) + ',' + str(e[j]) + ')\n'
                 i += 1
 
+        for j in range(self.MachineNumber-1):
             i = 1
-            str_out += 'CR\n'
-            for e in CR[m]:
-                str_out += '(' + str(i) + ',' + str(e) + ')\n'
+            str_out += str(j+2) + 'ST\n'
+            for e in ST:
+                str_out += '(' + str(i) + ',' + str(e[j]) + ')\n'
                 i += 1
 
-            for j in range(self.MachineNumber-1):
-                i = 1
-                str_out += str(j+1) + 'WIP\n'
-                for e in WIP[m]:
-                    str_out += '(' + str(i) + ',' + str(e[j]) + ')\n'
-                    i += 1
-
-            for j in range(self.MachineNumber-1):
-                i = 1
-                str_out += str(j+2) + 'ST\n'
-                for e in ST[m]:
-                    str_out += '(' + str(i) + ',' + str(e[j]) + ')\n'
-                    i += 1
-
-            for j in range(self.MachineNumber-1):
-                i = 1
-                str_out += str(j+1) + 'BL\n'
-                for e in BL[m]:
-                    str_out += '(' + str(i) + ',' + str(e[j]) + ')\n'
-                    i += 1
+        for j in range(self.MachineNumber-1):
+            i = 1
+            str_out += str(j+1) + 'BL\n'
+            for e in BL:
+                str_out += '(' + str(i) + ',' + str(e[j]) + ')\n'
+                i += 1
 
         # i = 1
         # str_out += 'PRss\n'

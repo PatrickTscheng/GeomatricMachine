@@ -16,7 +16,8 @@ for i in range(max_range):  # initial
     indi.append(MultiMachine(Pi, Ri, N))
 
 for i in range(n):
-    WIP.append([0 for j in range(MultiMachine.MachineNumber-1)])
+    WIP.append([0 for j in \
+        range(MultiMachine.MachineNumber-1)])
     ST.append([0 for j in range(MultiMachine.MachineNumber-1)])
     BL.append([0 for j in range(MultiMachine.MachineNumber-1)])
     for j in range(max_range):

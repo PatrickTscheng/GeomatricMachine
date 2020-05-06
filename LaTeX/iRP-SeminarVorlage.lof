@@ -1,7 +1,43 @@
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {1.1}{\ignorespaces Flow chart of Procedure.\relax }}{ix}{figure.caption.9}
-\contentsline {figure}{\numberline {1.2}{\ignorespaces Variance of Transient Parameters. (a) Production Rate; (b) Consumption Rate.\relax }}{x}{figure.caption.10}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{x}{figure.caption.10}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{x}{figure.caption.10}
+\contentsline {figure}{\numberline {1.1}{\ignorespaces two production system\relax }}{2}{figure.caption.9}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Serial line.}}}{2}{figure.caption.9}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Assymbly system.}}}{2}{figure.caption.9}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {2.1}{\ignorespaces A two-state Markov process\relax }}{4}{figure.caption.10}
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Serial production line.\relax }}{8}{figure.caption.11}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {3.1}{\ignorespaces State transition diagram of one geometric machine\relax }}{11}{figure.caption.12}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Transients of an individual geomatric machine when it is initially down\relax }}{12}{figure.caption.13}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Result of simulation}}}{12}{figure.caption.13}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Result of calculation}}}{12}{figure.caption.13}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Transients of an individual geomatric machine when it is initially up\relax }}{12}{figure.caption.14}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Result of simulation}}}{12}{figure.caption.14}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Result of calculation}}}{12}{figure.caption.14}
+\contentsline {figure}{\numberline {3.4}{\ignorespaces UML diagram of an individual machine model\relax }}{13}{figure.caption.15}
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Flow chart of an individual machine model\relax }}{14}{figure.caption.16}
+\contentsline {figure}{\numberline {3.6}{\ignorespaces State transition diagram of two geometric machine with buffer\relax }}{15}{figure.caption.17}
+\contentsline {figure}{\numberline {3.7}{\ignorespaces Transients of a two-machine geometric line. (a) $PR(n)\ and\ CR(n)$;(b) $WIP(n)$; (c) $ST_2(n)\ and\ BL_2(n)$\relax }}{17}{figure.caption.19}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{17}{figure.caption.19}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{17}{figure.caption.19}
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {}}}{17}{figure.caption.19}
+\contentsline {figure}{\numberline {3.8}{\ignorespaces UML diagram of a two-machine model\relax }}{18}{figure.caption.20}
+\contentsline {figure}{\numberline {3.9}{\ignorespaces Transients of a four-machine geometric line. (a) $PR(n) \ and\ CR(n)$;(b) $WIP(n)$; (c) $ST_i(n)$;(d) $BL_i(n)$.\relax }}{22}{figure.caption.21}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{22}{figure.caption.21}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{22}{figure.caption.21}
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {}}}{22}{figure.caption.21}
+\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {}}}{22}{figure.caption.21}
+\contentsline {figure}{\numberline {3.10}{\ignorespaces UML diagram of a multi-machine model\relax }}{23}{figure.caption.22}
+\contentsline {figure}{\numberline {3.11}{\ignorespaces Performance contrast of a two-machine geometric line $ST_2(n) \ and\ BL_2(n)$\relax }}{24}{figure.caption.23}
+\contentsline {figure}{\numberline {3.12}{\ignorespaces Transients of a four-machine geometric line. (a) $PR(n) \ and\ CR(n)$;(b) $WIP(n)$; (c) $ST_i(n)$;(d) $BL_i(n)$.\relax }}{25}{figure.caption.24}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{25}{figure.caption.24}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{25}{figure.caption.24}
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {}}}{25}{figure.caption.24}
+\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {}}}{25}{figure.caption.24}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Flow chart of Procedure.\relax }}{26}{figure.caption.25}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Variation of Transient Parameters. (a) Production Rate; (b) Consumption Rate.\relax }}{27}{figure.caption.26}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{27}{figure.caption.26}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{27}{figure.caption.26}
+\addvspace {10\p@ }
 \addvspace {10\p@ }
 \contentsfinish 

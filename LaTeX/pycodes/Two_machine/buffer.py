@@ -17,7 +17,7 @@ class Buffer:
             return False
 
     def add_one(self) -> bool:
-        if self.storage + 1 > self.Buffer_lim:  # 异常处理先不写了
+        if self.storage + 1 > self.Buffer_lim:  
             return False
         else:
             self.storage += 1

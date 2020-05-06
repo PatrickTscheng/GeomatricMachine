@@ -1,3 +1,4 @@
+import math
 import random
 from individual import Individual
 from buffer import Buffer
@@ -6,7 +7,7 @@ class MultiMachine:
     
     MachineNumber = 4
 
-    def __init__(self, Pi, Ri, N, MachineNumber):
+    def __init__(self, Pi, Ri, N, MachineNumber = 4):
         self.MachineNumber = MachineNumber
         self.BufferArray = []
         # N = random.randint(math.floor(1/Ri), math.floor(1/Ri*5))

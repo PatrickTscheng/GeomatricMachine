@@ -1,3 +1,18 @@
 \chapter{Conclusion}
 \label{E_Kapitel}
-\noindent 
+\noindent Nowadays, improving productivity and quality has becoming a core concern in manufacturing research. With global energy crisis and environmental problems, reducing energy costs and waste gas emission has been a significant issue for the manufacturing industry. In order to solve these problems, researchers investigate a lot of effort in the study of production systems. 
+
+Obviously, in comparison to the enrmous studies on steady state performance of production lines \cite{gershwin1991assembly,liu1990approximate}, very few results have been made in literature on the transient behavior of production systems. The goal of this research is to use the python to implement the simulations of the geometric machine model, and optimize the buffer size of a five-machine production lines.
+
+In this paper, we studied the transient performance evaluation of serial production lines with machines with geometric reliability model and finite buffers. The contribution are givne in this work as follows:
+
+\begin{itemize}
+    \item First part we review the research works of production systems, then make a summary, i.e. the past works in this field most focused on the steady performance of the production lines, while the transient evaluation still need more effort to be devoted. The detailed derivations of the model are given in Chapter 2.
+    \item Next, we make a brief introduction of the theory basis. In addition, the assumptions of the model of serial produciton line systems are presented and the performance measures are defined. The implementation of the system models are give in next chapter.
+    \item In Chapter 3, we use the python to implement three models, the single-machine production lines, two-machine with a buffer, and multi-machine with buffers. And we separately give the performance measures according to each kind of production lines. On the other hand, we make a comparison of the results with another work, and attempt to analyse the difference of the results. 
+    \item Moreover, in the next chapter we also make a study about the impact of buffer sizes on transient performace. In order to find the most suitable buffer size, we designed a procedure to analyse the critical transient performance. Eventual, it come to a conclusion that for a five-machine serial production lines 10 buffer is a more balanced size for each buffer.  
+    
+\end{itemize}
+
+It is plausible that still some limitations may exist in the results obtained.
+Firstly, the computational costs are still very large especially when the parameter changes and more production line devoted to calculate the mathematical expectation. In addition, the bottleneck of the prodution lines may still be dedicated efforts to investigate , and continuous improvement can be studied. Furthermore, the the structure of the model may be still simplified. Assembly systems and other production with complex structures remains to be explore. 

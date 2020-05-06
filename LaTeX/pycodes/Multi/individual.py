@@ -13,7 +13,7 @@ class Individual:
         self.x_n = X_init  # state of x false represent down
         self.flag_b_s = False
         # True represents the machine is blockage or stravation
-        if B_f is  None:  # flag is a special condition control the first(true) and last one(false)
+        if B_f is  None:  # flag is a special condition control
             self.B_b = B_b  # Buffer backward
             self.B_f = None
         elif B_b is None:
@@ -24,7 +24,6 @@ class Individual:
             self.B_b = B_b  # Buffer backward
 
     # simulation of a time slot
-    # return 1 represent a product return 0 represent no product
     def run_once(self):  # -> int bool
 
         ONE_PRODUCT = 1
@@ -59,7 +58,8 @@ class Individual:
             # print("fail")
             self.flag_b_s = self.starvation(self.B_f)
         else:
-            self.flag_b_s = self.starvation(self.B_f) or self.blockage(self.B_b)
+            self.flag_b_s = self.starvation(self.B_f) \
+                or self.blockage(self.B_b)
 
     def buffer_change(self):
         if self.B_f is None:

@@ -1,10 +1,10 @@
 \chapter{Model and Performance Measures}
 \label{B_Kapitel}
-\noindent This chapter mainly focus on the mathmatical model, the first part introduces the theoretical basis of the mathmatical mode, and the assumptions to build such mathmatical model, the second part presents the performance measures of transient properties.
+\noindent This chapter mainly focus on the mathmaticall model, the first part introduces the theoretical basis of the mathmaticall mode, and the assumptions to build such mathmaticall model, the second part presents the performance measures of transient properties.
 
 % #######################################################################
 \section{Model}
-\noindent Before the discussion of the mathmatical mode, the classic conception of Markov chain should be first introduced as the theoretical basis of stochastic models to describe a process of real world. This made the foundation of for general stochastic simulation methods known such as Markov chain Mente Carlo, which are suitable for simulating sampling from comlex probability distributions, and also able to be applied in Bayesian statistics and artificial intelligence. Besides, for serial production lines with geometric machines and finite buffers, in particular, there are more assumptions to describe and derive such a system.
+\noindent Before the discussion of the mathmaticall mode, the classic conception of Markov chain should be first introduced as the theoretical basis of stochastic models to describe a process of real world. This made the foundation of for general stochastic simulation methods known such as Markov chain Mente Carlo, which are suitable for simulating sampling from comlex probability distributions, and also able to be applied in Bayesian statistics and artificial intelligence. Besides, for serial production lines with geometric machines and finite buffers, in particular, there are more assumptions to describe and derive such a system.
 
 % #######################################################################
 \subsection{Markov chain}
@@ -60,7 +60,7 @@ For the random variables $\{x_\nu, 1\leq \nu \leq n\}$, it is not necessarily fi
 \end{equation}
 for any real finite $c_\nu$, $1\leq \nu \leq n$. It comes out that the same equation remains true if the sets $\{\genericelement :x_\nu (\genericelement)\leq c_\nu\}$ are changed to the more general sets ${\genericelement :x_\nu(\genericelement)\in A_\nu}$ where the $A_\nu$ are Borel sets in $X$. Suppose we habe a sequence $\{x_n,n\geq 1\}$, it is a sequence of independent random variables only if any finite number of them are independent. The denumerable sets $\Lambda_\nu$, $1\leq \nu \leq n$ or $1\leq \nu < \infty$ are independent only if their indicators are, the indicator of a set rendered as the function which on the set end is equal to one zero elsewhere.
 
-The mathmatical expectation of a random variable $x$ can be give by the abstract Lebesgue-Stieltjes integral
+The mathmaticall expectation of a random variable $x$ can be give by the abstract Lebesgue-Stieltjes integral
 \begin{equation}
     \expectation(x) = \int_{\probspace} x(\genericelement) \probmeasure(d\genericelement).
 \end{equation}
@@ -140,48 +140,44 @@ In this expression Markov property can be expressed verbally as positing that ''
 	\label{serial production line}.
 \end{figure*}
 
-% from this part need to change some way
-
 \begin{itemize}
     \item[1.] The system is composed of $M$ machines, arranged in series, and $M-1$ buffers between each consecutive pair of machines.
     \item[2.] The machines all have the same constant cycle time $\tau$. The time axis is limited in a slot duration $\tau$. Machines start to operate at the beginning of each time slot.
-    \item[3.] The machines obey the geometric reliability model: Let $s_i(n) \in \{0 = down, 1 = up\} $ denote the state of machine $m_i$ during time slot $n, i = 1, . . . , M$. Then, the transition probabilities are given by
+    \item[3.] The model requires the machine to observe geometric reliability: We use $s_i(n) \in \{0 = down, 1 = up\} $ to symbolize the state of machine $m_i$ during time slot $n, i = 1, ..., M$. Then, we can fomulate the transient probabilities as follow:
     \begin{equation}
         \begin{aligned}
-            Prob[s_i(n+1)=0|s_i(n)=1]=&P_i \\
-            Prob[s_i(n+1)=1|s_i(n)=1]=&1-P_i \\
-            Prob[s_i(n+1)=1|s_i(n)=0]=&R_i \\
-            Prob[s_i(n+1)=0|s_i(n)=0]=&1-R_i
+            \text{Prob}[s_i(n+1)=0|s_i(n)=1]=&P_i \\
+            \text{Prob}[s_i(n+1)=1|s_i(n)=1]=&1-P_i \\
+            \text{Prob}[s_i(n+1)=1|s_i(n)=0]=&R_i \\
+            \text{Prob}[s_i(n+1)=0|s_i(n)=0]=&1-R_i
         \end{aligned}
         \label{transition probabilities}
     \end{equation}
-    where $ P_i $ and $R_i$ are referred to as the breakdown and repair probabilities, respectively. All machines operate independently from one another.
-    \item[4.] Each buffer is characterized by its capacity (in other words, the maximum number of parts the buffer can hold), $1 \leq N_i < \infty$, $i = 1, . . . , M-1$.
-    \item[5.] Machine $m_i, i = 2, . . . , M$, is starved during a time slot if it is up and buffer $b_{i-1}$ is empty at the beginning of the time slot. Machine $m_1$ is never starved for raw material.
-    \item[6.] Machine $m_i,i = 1,...,M-1$, is blocked during a time slot if it is up, buffer $b_i$ has $N_i$ parts at the beginning of the time slot, and machine $m_{i+1}$ fails to take a part during the time slot. Machine $m_M$ is never blocked.
-    \item[7.] If a machine is up and neither starved or blocked, it processes one part in one time slot (i.e., takes one part from its upstream buffer at the beginning of the time slot, processes it during the time slot, and sends it to its downstream buffer at the end of the time slot); otherwise, no processing takes place for the machine in this time slot.
-    \item[8.] The system oprerates for a total of T time slots.
+    where $ P_i $ and $R_i$ are used to denote the breakdown and repair probabilities separately. Each machine has the operation independence from one another.
+    \item[4.] Each buffer is described by its capacity (in other words, the maximum number of products the buffer can preserve), $1 \leq N_i < \infty$, $i = 1, ..., M-1$.
+    \item[5.] Machine $m_i, i = 2, ..., M$, is in a state of starved condition in one time slot if it is up (i.e. it works properly) and buffer $b_{i-1}$ is empty at the start of this time slot. Machine $m_1$ will be never starved for there will always be raw material.
+    \item[6.] Machine $m_i,i = 1,...,M-1$, is in a blocked state in one time slot if it works properly, buffer $b_i$ has $N_i$ parts at the start of this time slot, and machine $m_{i+1}$ is  to take a product in this time slot. Machine $m_M$ will never be blocked.
+    \item[7.] If a machine works well and is neither starved or blocked, it is capable to process one product during a time slot (in other words, takes a product from its upstream buffer at the start of this time slot, processes it within the time slot, and puts it into its downstream buffer at the end of the time slot); otherwise, no processing will occur for the machine in this time slot.
+    \item[8.] The system works in a total of T time slots.
 \end{itemize}
 
-\textsl{Remark 1}: Under the assumption 3. the up- and downtime of machine $m_i$ are geometric random variables. The average of its up- and downtime can be calculated as $T_{up,i}=1 / P_i$ and $T_{down,i} = 1/ R_i$, respectively. In addition, the machine efficiency, i.e., the probability (proportion of time) that $m_i$ is up in steady state, can be calculated as $e_i=T_{up,i}/(T_{up,i}+T_{down,i}) = R_i/(R_i + P_i)$.
+\textsl{Remark 1}: For the assumption 3, the up and downtime of machine $m_i$ are geometric random values. We can calculate its average up- and downtime through $T_{up,i}=1 / P_i$ and $T_{down,i} = 1/ R_i$, separately. Moreover, the machine efficiency, in other words, the probability (ratio of time) that $m_i$ works properly in steady state, can be calculated by $e_i=T_{up,i}/(T_{up,i}+T_{down,i}) = R_i/(R_i + P_i)$.
 
-\textsl{Remark 2}: The geometric reliability model is usually applicable, when the machine's average downtime is much longer than its cycle time (e.g., in machining, heat treatment, washing operations). Steady state behavior of the geometric serial lines has been studied in a number of publications in production systems research \cite{papadopolous1993queueing,buzacott1993stochastic, gershwin1994manufacturing,altiok1997performance} The geometric model has also been successfully applied in industrial case studies (see, for instance, \cite{li2003due, liberopoulos2007performance}).
+\textsl{Remark 2}: When the average downtime of the machine is much longer than its cycle time (for instance, in machining, painting, wielding operations)the geometric reliability is generally applicable. Steady state performance of the geometric serial lines has been explored in numerous publications in manufacturing systems literatures \cite{papadopolous1993queueing,buzacott1993stochastic, gershwin1994manufacturing,altiok1997performance} The geometric model also has a successful application in industrial occasions works (i.e. \cite{li2003due, liberopoulos2007performance}).
 
-\textsl{Remark 3}: The above assumptions imply that the failures are time-dependent (i.e., a machine may break down during starvation or blockage). Another failure model alternative, operation-dependent failure (i.e., a machine cannot break down during starvation or blockage), is also used in the literature. The behavior and performance of systems defined by both conventions are very similar (see \cite{li2006comparisons}). In this paper we consider time-dependent failures.
+\textsl{Remark 3}: These previous assumptions indicate that the failures of machines are time-dependent (in other words, in a state of starvation or blockage a machine may still break down). Another kind of failure model as an optional choice, operation-dependent failure (in other words, in the state of starvation or blockage, a machine will not break down), is also covered in the literature. The properties and behavior of systems established by both declarations are very approximate (by \cite{li2006comparisons}). In this work we consider the former one, time-dependent failures.
 
-\textsl{Remark 4}: Assumption 6. implies the blocked-before-service (BBS) convention, under which, a machine may be starved and blocked during the same time slot. Its counterpart, the blocked-after-service (BAS) convention, is also widely used in production systems research (see \cite{dallery1992manufacturing, papadopoulos1996queueing,li2009throughput}). The analysis of systems defined by both conventions are similar. In fact, a system model under one convention can be converted to the model with the other convention by modifying the buffer capacity by one unit. In this paper we use BBS convention, since it leads to a simpler description \cite{li2008production}.
-
-Production systems with machines having other reliability models (e.g., exponential, Weibull, gamma, log-normal, and empirical, etc.) and non-identical cycle times will be studied in future work.
+\textsl{Remark 4}: Assumption 6. indicates the blocked-before-service (BBS) regulation, under which, a machine may be in a starvation and blockage state in the same time slot. Its similitude, the blocked-after-service (BAS) regulation, is also extensively used in production systems research (see \cite{dallery1992manufacturing, papadopoulos1996queueing,li2009throughput}). The analysis of systems established by both regulations are approximate. In fact, either system models under one regulation can be transformed into the another one with the other regulation by changing the buffer size by one unit. In this work we use BBS regulation, because it results in a simpler statement \cite{li2008production}.
 
 
 \section{Performance Measures}
 \label{performance measures}
-\noindent To carry out rigorous real-time analysis and control of production systems, transient performance measures must be defined. In the framework of geometric serial lines defined by assumptions 1-8, the performance measures of interest are:
+\noindent In order to conduct strict control of production systems and real-time evaluation, transient performance measures must be introduced. In the framework of geometric serial lines given by assumptions 1-8, the performance measures of interest are:
 \begin{itemize}
     \item[$\bullet$] \textsl{Production Rate}, $PR(n) = $ the expected number of finished parts produced by $m_M$ in time slot $n$;
     \item[$\bullet$] \textsl{Consumption Rate}, $CR(n)=$ the expected number of raw parts consumed by $m_1$ in time slot $n$;
-    \item[$\bullet$] \textsl{Work-in-process}, $WIP_i(n)=$ the expected number of parts in buffer $b_i$ at the beginning of time slot $n$, $i=1,...,M-1$;
+    \item[$\bullet$] \textsl{Work-in-process}, $WIP_i(n)=$ the expected number of parts in buffer $b_i$ at the start of time slot $n$, $i=1,...,M-1$;
     \item[$\bullet$] \textsl{Machine Starvation}, $ST_i(n)=$ Prob[$m_i$ is starved by $b_{i-1}$ in time slot $n$], $i=2,...,M$;
     \item[$\bullet$] \textsl{Machine Blockage},$ BL_i(n)=$ Prob[$m_i$ is blocked by $b_i$ in time slot $n$], $ i=1,...,M-1$.
 \end{itemize}
-In this paper, we develop analytical methods to calculate these transient performance measures. It should be noted that, in this paper, the term “analytical” refers to formula-based calculation methods (either exact or approximate) as opposed to computer simulation.
+In this paper, we take average of numours simulation results to get these performance measures of interest. It should be noted that, in this paper, a simulation procedure uses least $10000$ the production lines to get the mathematical expectations.

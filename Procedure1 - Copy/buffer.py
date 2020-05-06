@@ -1,10 +1,8 @@
-import random
 class Buffer:
 
     def __init__(self, Buffer_lim: int):
         self.Buffer_lim = Buffer_lim
         self.storage = 0
-        # self.storage = random.randint(0, Buffer_lim*5)
 
     def check_null(self) -> bool:
     #     print("check n")

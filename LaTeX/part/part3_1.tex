@@ -1,5 +1,10 @@
 \section{Individual Geomatric Machine}
 \noindent Although transient analysis of individual geometric machines with constant parameters has been studied in \cite{meerkov2010transient}, as the basis of all the following models, we still take it as the primary work. Since the performance evaluation method which we try to derive is the foundation of the study in the this paper, we briefly introduce it below.
+
+
+\subsection{Mathematical Derivation of Individual Machine}
+\noindent Since derivation of the performance evaluation method is the foundamental work of the study in this work, we first view it as following.
+
 \begin{figure}[!h]
 	\centering
 	\includegraphics[]{figures/model_of_one_machine.tikz}
@@ -7,25 +12,25 @@
 	\label{State transition diagram of one geometric machine}
 \end{figure}
 
-% simply copy need to reedit
-
-The state transition schema for an individual geometric machine is illustrated in Figure \ref{State transition diagram of one geometric machine}. We use $x_i(n), i \in \{0=down,1=up\}$ to indicate the probability that the machine is in state $i$ during time slot $n$, that is $x_i(n)=Prob[s(n)=i]$. Apparently, the system is described by a two-state ergodic Markov chain and the transformmation of state vector $x(n)=[x_0(n) \quad x_1(n)]^T$ can be described by
+The state transition diagram for an individual geometric machine is illustrated in Figure \ref{State transition diagram of one geometric machine}. We use $x_i(n), i \in \{0=down,1=up\}$ to indicate the probability that the machine is in state $i$ during time slot $n$, that is $x_i(n)=Prob[s(n)=i]$. Apparently, the system is described by a two-state ergodic Markov chain and the transformation of state vector $x(n)=[x_0(n) \quad x_1(n)]^T$ can be presented by
 \begin{equation}
 	x(n+1) = A_1x(n), x_0(n) + x_1(n) =1
 \end{equation}
 where
-\begin{equation} A_1 = \begin{bmatrix} 1-R&P\\R&1-P \end{bmatrix} \end{equation}
+\begin{equation} A_1 = 
+\begin{bmatrix} 1-R&P\\R&1-P 
+\end{bmatrix} 
+\end{equation}
 
-% \begin{math}x(n+1)=A_1 x(n)\end{math}
-The production rate and consumption rate of an individual machine with the original state both down(0) and up(1) can be calculated as 
-\begin{equation} PR(n)=CR(n)=x_1(n)=\begin{bmatrix} 0&1 \end{bmatrix}x(n)=\begin{bmatrix} 0&1 \end{bmatrix}A_1^n
-x(0) \end{equation}
+The production rate and consumption rate of an individual machine with the original state both down(0) and up(1) can be evaluated as follow
+\begin{equation}
+ PR(n)=CR(n)=x_1(n)= \begin{bmatrix} 0&1 \end{bmatrix}
+x(n)=\begin{bmatrix} 0&1 \end{bmatrix}A_1^n
+x(0) 
+\end{equation}
+which is separately linear in machine state $x(n)$.
 
-the Figure~\ref{Transients of an individual geomatric machine when it is initially down} is the contrast of simulation and calculation of one geometric machine with initial state of down with the parameters of breakdown
-probability $P = 0.05$ and repair probability $R = 0.2$.
-which are both linear in machine state $x(n)$.
-
-As an illustration, consider a geometric machine with breakdown probability $P=0.05$ and repair probability $R=0.2$. The transients of the system state and the performance measures are given in Figure \ref{Transients of an individual geomatric machine when it is initially down} and \ref{Transients of an individual geomatric machine when it is initially up}, assuming the machine is initially down and up, respectively. As one can see, the initial condition of a machine has strong impact on system transients—which may result in production loss (see Fig. 3) or production gain (see Fig. 4).
+As figured out in the diagram, suppose a geometric machine given with breakdown probability $P=0.05$ and repair probability $R=0.2$. The performance measures and the transformation of the system state can be illustrated in Figure \ref{Transients of an individual geomatric machine when it is initially down} and \ref{Transients of an individual geomatric machine when it is initially up}, assuming the machine is in a beginning state of down and up, separately. As all implied, the initial condition of a machine strongly influence on system state transients, which may lead to production loss (see Figure \ref{Transients of an individual geomatric machine when it is initially down}) or production gain (see Figure \ref{Transients of an individual geomatric machine when it is initially up}).
 
 \begin{figure*}[!h]
 	\centering
@@ -51,7 +56,24 @@ As an illustration, consider a geometric machine with breakdown probability $P=0
 	\label{Transients of an individual geomatric machine when it is initially up}
 \end{figure*}
 
-In the python code, we use the object-oriented features to help build the model. We seperate the codes into two parts. The first part is a class file called Individual. A \pythoninline{class Individual} represents a geomatirc machine that runs in a two-state Markov chain. It holds the parameters, which are transformed from another file, and calculates once a time slot till the end of the time control parameter \pythoninline{n} changes to zero.
-\pythonexternal{pycodes/individual/individual.py}
-Another file, which is used to call the \pythoninline{class Individual}, are also attached as following. The main purpose of this file is to calculate the the average values of all the evaluation performance in order to get the mathmatical expectation. The final daten are collected in the file called \pythoninline{result.txt}.
-\pythonexternal{pycodes/individual/simu1.py}
+\subsection{Implementation of Individual Machine}
+\noindent In the python, we use the object-oriented features to help build the model. In order to illustrate the structure, we use a xml diagram (see Figure \ref{individual uml}). We separate the codes into two parts. The first part is a class file called Individual. A \pythoninline{class Individual} represents a geomatirc machine that runs in a two-state Markov chain. It holds the parameters, which are transformed from another file, and calculates once a time slot till the end of the time control parameter \pythoninline{n} changes to zero.
+
+Another file, which is used to call the ''simu1.py'', are also attached in Appendix. The main purpose of this file is to calculate the the average values of all the evaluation performance in order to get the mathmaticall expectation. The final daten are collected in the file called \pythoninline{result.txt}.
+
+
+\begin{figure*}[!h]
+	\centering
+	\includegraphics[width=0.8\linewidth]{individual.png}
+	\caption{UML diagram of an individual machine model}
+	\label{individual uml}
+\end{figure*}
+
+We also use a flow chart to describe the procedure of an individual machine model (see Figure \ref{individual flow}). The fuction \pythoninline{run_once()} detect whether the machine is up or down, and according its situation give another judgement if it should be repaired/broken or not. Furthermore, it will ended up with this time slot and start another one.
+
+\begin{figure*}[!h]
+	\centering
+	\includegraphics[width=0.65\linewidth]{individual_flow.png}
+	\caption{Flow chart of an individual machine model}
+	\label{individual flow}
+\end{figure*}
